@@ -1,0 +1,12 @@
+services:
+  visir:
+    image: ghcr.io/r-dvl/visir/visir:latest
+    container_name: ams-invoice-control
+    volumes:
+      - data:/app/data
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+volumes:
+  data:
