@@ -1,3 +1,6 @@
+"""
+Views for the 'inventory' app.
+"""
 from django.shortcuts import render
 
 def index(request):
