@@ -5,6 +5,7 @@ import sys
 
 
 def main():
+    # pylint: disable=no-member
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
     try:
@@ -16,6 +17,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+    # pylint: enable=no-member
 
 
 if __name__ == '__main__':
