@@ -5,10 +5,10 @@ import sys
 
 
 def main():
-    # pylint: disable=no-member
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
     try:
+        # pylint: disable-next=global-statement
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(
@@ -17,7 +17,6 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-    # pylint: enable=no-member
 
 
 if __name__ == '__main__':
