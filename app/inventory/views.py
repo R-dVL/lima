@@ -1,19 +1,33 @@
 """
-Views for the 'inventory' app.
+Views for the 'Inventory' app.
 """
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Article
 
-def index(request):
-    """
-    View function for the index page.
+@login_required
+def article_list(request):
+    items = Article.objects.all()
+    return render(request, 'article_list.html', {'items': items})
 
-    This function handles requests to the root URL of the app and returns
-    the 'index.html' template as a response.
+# Views for 'at home' quantity
+def increase_quantity(request, pk):
+    item = get_object_or_404(Article, pk=pk)
+    item.increase_quantity(1)
+    return redirect('article_list')
 
-    Args:
-        request (HttpRequest): The HTTP request object.
+def decrease_quantity(request, pk):
+    item = get_object_or_404(Article, pk=pk)
+    item.decrease_quantity(1)
+    return redirect('article_list')
 
-    Returns:
-        HttpResponse: The rendered 'index.html' template.
-    """
-    return render(request, 'index.html')
+# Views for 'to buy' quantity
+def increase_quantity_to_buy(request, pk):
+    item = get_object_or_404(Article, pk=pk)
+    item.add_to_buy(1)
+    return redirect('article_list')
+
+def decrease_quantity_to_buy(request, pk):
+    item = get_object_or_404(Article, pk=pk)
+    item.remove_from_buy(1)
+    return redirect('article_list')

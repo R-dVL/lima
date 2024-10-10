@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+    Inventory | Visir
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Inventory</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">At Home</th>
+                <th scope="col">To Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!-- Only show "-" button if quantity_at_home > 0 -->
+                            {% if item.quantity_at_home > 0 %}
+                                <a href="{% url 'decrease_quantity' item.pk %}" class="btn btn-danger btn-sm mr-2">-</a>
+                            {% endif %}
+                            {{ item.quantity_at_home }}
+                            <a href="{% url 'increase_quantity' item.pk %}" class="btn btn-success btn-sm ml-2">+</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!-- Only show "-" button if quantity_to_buy > 0 -->
+                            {% if item.quantity_to_buy > 0 %}
+                                <a href="{% url 'decrease_quantity_to_buy' item.pk %}" class="btn btn-danger btn-sm mr-2">-</a>
+                            {% endif %}
+                            {{ item.quantity_to_buy }}
+                            <a href="{% url 'increase_quantity_to_buy' item.pk %}" class="btn btn-success btn-sm ml-2">+</a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No items in inventory.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
