@@ -1,5 +1,7 @@
 """
 Views for the 'Inventory' app.
+
+This module handles the logic for managing articles in the inventory.
 """
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -17,11 +19,11 @@ def article_list(request):
     Returns:
         Rendered HTML page displaying the list of articles.
     """
-    items = Article.objects.all()  # Ensure that the Article model has the default manager
+    items = Article.objects.all()  # Retrieve all Article instances
     return render(request, 'article_list.html', {'items': items})
 
 @login_required
-def increase_quantity(request, pk):
+def increase_quantity(request, pk):  # pylint: disable=unused-argument
     """
     Increase the quantity of an article at home.
 
@@ -37,7 +39,7 @@ def increase_quantity(request, pk):
     return redirect('article_list')
 
 @login_required
-def decrease_quantity(request, pk):
+def decrease_quantity(request, pk):  # pylint: disable=unused-argument
     """
     Decrease the quantity of an article at home.
 
@@ -53,7 +55,7 @@ def decrease_quantity(request, pk):
     return redirect('article_list')
 
 @login_required
-def increase_quantity_to_buy(request, pk):
+def increase_quantity_to_buy(request, pk):  # pylint: disable=unused-argument
     """
     Increase the quantity of an article to buy.
 
@@ -69,7 +71,7 @@ def increase_quantity_to_buy(request, pk):
     return redirect('article_list')
 
 @login_required
-def decrease_quantity_to_buy(request, pk):
+def decrease_quantity_to_buy(request, pk):  # pylint: disable=unused-argument
     """
     Decrease the quantity of an article to buy.
 

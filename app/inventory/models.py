@@ -16,17 +16,19 @@ class Article(models.Model):
 
     Methods:
         increase_quantity(amount): Increases the quantity of the article at home by a specified amount.
-        decrease_quantity(amount): Decreases the quantity of the article at home by a specified amount, 
+        decrease_quantity(amount): Decreases the quantity of the article at home by a specified amount,
             ensuring it does not go below zero.
         add_to_buy(amount): Increases the quantity of the article to buy by a specified amount.
-        remove_from_buy(amount): Decreases the quantity of the article to buy by a specified amount, 
+        remove_from_buy(amount): Decreases the quantity of the article to buy by a specified amount,
             ensuring it does not go below zero.
     """
 
     name = models.CharField(max_length=255)
     quantity_at_home = models.IntegerField(default=0)
     quantity_to_buy = models.IntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
 
     # Methods for 'quantity_at_home'
     def increase_quantity(self, amount):
@@ -62,7 +64,7 @@ class Article(models.Model):
         """Decreases the quantity of the article to buy.
 
         Args:
-            amount (int): The amount to decrease the quantity to buy by. 
+            amount (int): The amount to decrease the quantity to buy by.
             If the quantity is zero, no change occurs.
         """
         if self.quantity_to_buy > 0:

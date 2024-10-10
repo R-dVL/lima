@@ -1,3 +1,9 @@
+"""
+Views for the 'users' app.
+
+This module handles user authentication, including login and logout functionality.
+"""
+
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -23,10 +29,10 @@ def login_view(request):
         if user is not None:
             login(request, user)
             next_url = request.GET.get('next', '')
-            return redirect(next_url or 'home')
-        else:
-            messages.error(request, 'Credenciales incorrectas')
-    return render(request, 'login.html')
+            return redirect(next_url or 'home')  # Redirect to 'home' if no 'next' URL
+        messages.error(request, 'Credenciales incorrectas')  # Show error message if authentication fails
+
+    return render(request, 'login.html')  # Render the login page for GET requests
 
 def logout_view(request):
     """
