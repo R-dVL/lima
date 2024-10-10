@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  IMAGE_NAME: visir
+  IMAGE_NAME: lima
 
 jobs:
   build-and-push:

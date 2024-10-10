@@ -1,6 +1,6 @@
 services:
-  visir:
-    image: ghcr.io/r-dvl/visir/visir:latest
+  lima:
+    image: ghcr.io/r-dvl/lima/lima:latest
     container_name: ams-invoice-control
     volumes:
       - data:/app/data
