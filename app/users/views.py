@@ -30,7 +30,7 @@ def login_view(request):
             login(request, user)
             next_url = request.GET.get('next', '')
             return redirect(next_url or 'home')  # Redirect to 'home' if no 'next' URL
-        messages.error(request, 'Credenciales incorrectas')  # Show error message if authentication fails
+        messages.error(request, 'Credenciales incorrectas')
 
     return render(request, 'login.html')  # Render the login page for GET requests
 
@@ -47,4 +47,4 @@ def logout_view(request):
         Redirect to the login page.
     """
     logout(request)
-    return redirect('login')  # Redirect to the login URL after logout
+    return redirect('login')
