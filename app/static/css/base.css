@@ -1,0 +1,24 @@
+.btn-group .btn {
+    border-radius: 20px; /* Adjust this value for a more pronounced oval shape */
+    background-color: #6c757d; /* Grey color */
+    color: white; /* Text color */
+}
+
+.btn-group .btn.disabled {
+    background-color: rgba(108, 117, 125, 0.5); /* Lighter grey with transparency */
+    color: rgba(255, 255, 255, 0.5); /* Lighter text color */
+    pointer-events: none; /* Prevent clicks on the disabled button */
+}
+
+.btn-group .btn:not(:last-child) {
+    border-right: none; /* Remove right border of the - button to unify the appearance */
+}
+
+@media (max-width: 576px) {
+    .card h5 {
+        font-size: 1.2rem; /* Smaller font size for mobile */
+    }
+    .btn-group .btn {
+        font-size: 0.9rem; /* Adjust button size */
+    }
+}

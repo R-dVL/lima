@@ -1,10 +1,17 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-title" content="AMS" />
+    <meta name="apple-mobile-web-app-title" content="Visir" />
+
+    <link rel="icon" type="image/png" href="/static/assets/icons/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/static/assets/icons/favicon.svg" />
+    <link rel="shortcut icon" href="/static/assets/icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Lima" />
+    <link rel="manifest" href="/static/assets/icons/site.webmanifest" />
 
     <title>{% block title %}{% endblock %}</title>
 
@@ -13,6 +20,7 @@
         {% bootstrap_css %}
         {% bootstrap_javascript %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock stylesheets %}
 </head>
 <body>
