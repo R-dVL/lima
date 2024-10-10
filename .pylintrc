@@ -1,6 +1,6 @@
 [MASTER]
 # A comma-separated list of packages or modules to be ignored
-ignore=app/inventory/migrations, app/users/migrations
+ignore=migrations
 
 # A regular expression matching the files and directories to ignore
 ignore-patterns=migrations/*
