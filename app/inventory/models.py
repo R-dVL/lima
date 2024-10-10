@@ -3,7 +3,7 @@ Models for the 'inventory' app.
 """
 from django.db import models
 
-class Inventory(models.Model):
+class Article(models.Model):
     name = models.CharField(max_length=100)
     quantity_at_home = models.PositiveIntegerField(default=0)
     quantity_to_buy = models.PositiveIntegerField(default=0)
