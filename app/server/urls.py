@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from .views import redirect_to_inventory
 
 urlpatterns = [
+    path('', redirect_to_inventory, name='redirect'),
     path('inventory/', include('inventory.urls')),
     path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
