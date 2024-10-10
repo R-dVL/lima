@@ -14,6 +14,14 @@ urlpatterns = [
     path('', views.article_list, name='article_list'),
     path('increase/<int:pk>/', views.increase_quantity, name='increase_quantity'),
     path('decrease/<int:pk>/', views.decrease_quantity, name='decrease_quantity'),
-    path('increase-to-buy/<int:pk>/', views.increase_quantity_to_buy, name='increase_quantity_to_buy'),
-    path('decrease-to-buy/<int:pk>/', views.decrease_quantity_to_buy, name='decrease_quantity_to_buy'),
+    path(
+        'increase-to-buy/<int:pk>/',
+        views.increase_quantity_to_buy,
+        name='increase_quantity_to_buy'
+        ),
+    path(
+        'decrease-to-buy/<int:pk>/',
+        views.decrease_quantity_to_buy,
+        name='decrease_quantity_to_buy'
+    ),
 ]
