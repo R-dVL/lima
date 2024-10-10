@@ -15,8 +15,8 @@ class Article(models.Model):
         price (Decimal, optional): The price of the article. It can be null or blank.
 
     Methods:
-        increase_quantity(amount): Increases the quantity of the article at home by a specified amount.
-        decrease_quantity(amount): Decreases the quantity of the article at home by a specified amount,
+        increase_quantity(amount): Increases the quantity of the article at home.
+        decrease_quantity(amount): Decreases the quantity of the article at home,
             ensuring it does not go below zero.
         add_to_buy(amount): Increases the quantity of the article to buy by a specified amount.
         remove_from_buy(amount): Decreases the quantity of the article to buy by a specified amount,
@@ -44,7 +44,7 @@ class Article(models.Model):
         """Decreases the quantity of the article at home.
 
         Args:
-            amount (int): The amount to decrease the quantity by. If the quantity is zero, no change occurs.
+            amount (int): The amount to decrease the quantity by.
         """
         if self.quantity_at_home > 0:
             self.quantity_at_home -= amount

@@ -19,7 +19,7 @@ def article_list(request):
     Returns:
         Rendered HTML page displaying the list of articles.
     """
-    items = Article.objects.all()  # Retrieve all Article instances
+    items = Article.objects.all()  # pylint: disable=E1101
     return render(request, 'article_list.html', {'items': items})
 
 @login_required
