@@ -3,4 +3,4 @@
 ignore=migrations
 
 # A regular expression matching the files and directories to ignore
-ignore-patterns=migrations/*
+ignore-patterns=^app/inventory/migrations/.*\.py$

@@ -28,9 +28,3 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           pylint --rcfile=.pylintrc $(git ls-files '*.py')
-
-      - name: Fail on Pylint errors
-        if: ${{ failure() }}  # Este paso fallará si pylint encuentra errores
-        run: |
-          echo "Pylint found issues. Please fix them before merging."
-          exit 1
