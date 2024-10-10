@@ -24,9 +24,11 @@
     {% endblock stylesheets %}
 </head>
 <body>
+    {% include "_navbar.html" %}
     <div class="container mt-5">
         {% block content %}
         {% endblock %}
     </div>
+    {% include "_footer.html" %}
 </body>
 </html>

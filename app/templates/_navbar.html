@@ -1,0 +1,33 @@
+{% load static %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img id="lima-logo" src="{% static 'assets/icons/favicon.svg' %}" alt="Logo" draggable="false" height="50" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="/inventory"><i class="fas fa-file-lines pe-2"></i>Inventario</a>
+                </li>
+                {% if request.user.is_superuser %}
+                <li class="nav-item ms-3">
+                    <a class="btn btn-light btn-rounded" href="/admin"><i class="fas fa-user-secret pe-2"></i>Admin</a></a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li class="nav-item ms-3">
+                    <a class="btn btn-secondary btn-rounded" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item ms-3">
+                    <a class="btn btn-secondary btn-rounded" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
