@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+Detalle articulo | Lima
+{% endblock %}
+{% block content %}
+
+    <h3 class="mb-4">Detalles del artículo</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <strong>Nombre del artículo:</strong> {{ article.name }}
+            </div>
+            <div class="mb-3">
+                <strong>Descripción:</strong> {{ article.description }}
+            </div>
+            <div class="mb-3">
+                <strong>Precio:</strong> {{ article.price }} €
+            </div>
+            <div class="mb-3">
+                <strong>Cantidad:</strong> {{ article.quantity }}
+            </div>
+        </div>
+
+        <div class="mt-4 text-end">
+            <a href="{% url 'article_list' %}" class="btn btn-secondary">Cerrar</a>
+        </div>
+    </div>
+
+    {% endblock %}
