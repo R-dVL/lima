@@ -26,7 +26,7 @@ class Article(models.Model):
     description = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField(default=0)
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, null=True, blank=True
+        max_digits=10, decimal_places=2, default=0
     )
 
     # Methods for 'quantity'
