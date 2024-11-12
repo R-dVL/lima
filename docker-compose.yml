@@ -1,11 +1,11 @@
 services:
   lima:
     image: ghcr.io/r-dvl/lima/lima:latest
-    container_name: ams-invoice-control
+    container_name: lima
     volumes:
       - data:/app/data
     ports:
-      - 8000:8000
+      - 32500:8000
     restart: unless-stopped
 
 volumes:
