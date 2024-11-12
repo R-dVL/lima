@@ -20,7 +20,7 @@ def article_list(request):
     Automatically sorted by quantity (ascending).
     """
     # Retrieve all articles from the inventory and order them by quantity (ascending)
-    items = Article.objects.all().order_by('quantity')  # Ordenar por cantidad, de menos a más
+    items = Article.objects.all().order_by('quantity')
 
     # Initialize the filter form
     form = ItemFilterForm(request.GET)

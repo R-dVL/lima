@@ -74,41 +74,28 @@
         {% endfor %}
     </div>
 
-    <!-- Paginación -->
-    <div class="d-flex justify-content-center mt-4">
-        <div>
+    <!-- Paginación centrada y simplificada con información de página -->
+    <div class="d-flex justify-content-center my-4">
+        <ul class="pagination">
             {% if page_obj.has_previous %}
-                <a href="?page=1" class="btn btn-outline-primary">Primera</a>
-                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">Anterior</a>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                </li>
             {% endif %}
-            <span class="mx-3">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+            <!-- Información de página actual y total de páginas -->
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Siguiente</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Última</a>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                </li>
             {% endif %}
-        </div>
+        </ul>
     </div>
-
-    <script>
-        // Obtener el formulario y la lista de artículos
-        const filterForm = document.getElementById('filter-form');
-        const articleList = document.getElementById('article-list');
-
-        // Función para filtrar los artículos en vivo
-        filterForm.addEventListener('input', function () {
-            const query = filterForm.querySelector('input[name="name"]').value.toLowerCase();
-
-            // Filtrar los artículos basados en el texto del campo de búsqueda
-            const items = articleList.querySelectorAll('.col-md-4');
-            items.forEach(item => {
-                const itemName = item.querySelector('.card-title').textContent.toLowerCase();
-                if (itemName.includes(query)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </div>
 {% endblock %}
