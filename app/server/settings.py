@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-h6^c64$6540elqq_ngu6)nnpa8)570ty)au7wjmjs8=nh=*qts
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://lima.rdvl-server.site']
+CSRF_TRUSTED_ORIGINS = ['https://lima.rdvl.net']
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'users.apps.UsersConfig',
     'bootstrap5',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

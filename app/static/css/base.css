@@ -1,4 +1,4 @@
-.btn-group .btn {
+.btn {
     border-radius: 20px; /* Ajusta este valor para un forma ovalada más pronunciada */
     background-color: #6c757d; /* Color gris */
     color: white; /* Color del texto */
@@ -6,25 +6,27 @@
     font-size: 0.7rem; /* Tamaño de fuente más pequeño */
 }
 
-.btn-group .btn.disabled {
+.btn.disabled {
     background-color: rgba(108, 117, 125, 0.5); /* Gris más claro con transparencia */
     color: rgba(255, 255, 255, 0.5); /* Color de texto más claro */
     pointer-events: none; /* Evitar clics en el botón deshabilitado */
-}
-
-.btn-group .btn:not(:last-child) {
-    border-right: none; /* Elimina el borde derecho del botón - para unificar la apariencia */
-}
-
-.btn-group .quantity {
-    margin-right: 20px; /* Aumenta el margen entre el valor y los botones */
 }
 
 @media (max-width: 576px) {
     .card h5 {
         font-size: 1.2rem; /* Tamaño de fuente más pequeño para móvil */
     }
-    .btn-group .btn {
+    .btn {
         font-size: 0.7rem; /* Ajustado el tamaño de los botones */
     }
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
 }

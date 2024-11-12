@@ -3,7 +3,8 @@ Views for the 'Inventory' app.
 
 This module handles the logic for managing articles in the inventory.
 """
-
+from django import forms
+from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Article
@@ -54,34 +55,47 @@ def decrease_quantity(request, pk):  # pylint: disable=unused-argument
     item.decrease_quantity(1)
     return redirect('article_list')
 
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ['name', 'quantity']
+
 @login_required
-def increase_quantity_to_buy(request, pk):  # pylint: disable=unused-argument
+def add_article(request):
     """
-    Increase the quantity of an article to buy.
+    Handle the addition of a new article to the inventory.
 
     Args:
         request: The HTTP request object.
-        pk: The primary key of the article to increase to buy.
 
     Returns:
-        Redirects to the article list page.
+        Rendered HTML page for adding a new article or redirects to the article list.
     """
-    item = get_object_or_404(Article, pk=pk)
-    item.add_to_buy(1)
-    return redirect('article_list')
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('article_list')
+    else:
+        form = ArticleForm()
+    return render(request, 'add_article.html', {'form': form})
 
 @login_required
-def decrease_quantity_to_buy(request, pk):  # pylint: disable=unused-argument
+def delete_article(request, pk):
     """
-    Decrease the quantity of an article to buy.
+    Handle the deletion of an article from the inventory.
 
     Args:
         request: The HTTP request object.
-        pk: The primary key of the article to decrease to buy.
+        pk: The primary key of the article to delete.
 
     Returns:
-        Redirects to the article list page.
+        Redirects to the article list page upon successful deletion.
     """
-    item = get_object_or_404(Article, pk=pk)
-    item.remove_from_buy(1)
-    return redirect('article_list')
+    article = get_object_or_404(Article, pk=pk)
+    
+    if request.method == 'POST':
+        article.delete()
+        return redirect('article_list')
+    
+    return render(request, 'delete_article.html', {'article': article})
