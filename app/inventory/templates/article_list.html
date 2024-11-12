@@ -6,9 +6,16 @@
 {% block content %}
 <div class="container mt-5">
     <form method="GET" class="mb-4" id="filter-form">
-        <div class="row">
-            <div class="col-md-9">
+        <div class="d-flex align-items-center">
+            <!-- Barra de búsqueda -->
+            <div class="flex-grow-1">
                 {{ form.name }}
+            </div>
+            <!-- Botón Añadir -->
+            <div class="ms-3">
+                <a href="{% url 'create_article' %}" class="btn btn-primary">
+                    Añadir
+                </a>
             </div>
         </div>
     </form>
@@ -16,11 +23,9 @@
     <div class="row" id="article-list">
         {% for item in items %}
         <div class="col-12 col-md-4 mb-3">
-            <!-- Si la cantidad es 0, aplica la clase 'out-of-stock' -->
             <div class="card position-relative {% if item.quantity == 0 %}out-of-stock{% endif %}"
                 style="border: 1px solid #6c757d; border-radius: 15px;">
                 
-                <!-- Dropdown button con las opciones Editar y Eliminar -->
                 <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
                     <button class="btn p-0" 
                             id="dropdownMenuLink{{ item.pk }}" 
@@ -67,17 +72,6 @@
             No items in inventory.
         </div>
         {% endfor %}
-    </div>
-
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        <div style="font-size: 1.2rem; font-weight: bold;">
-            <!-- Total eliminado -->
-        </div>
-        <div>
-            <a href="{% url 'create_article' %}" class="btn btn-primary btn-lg">
-                Añadir
-            </a>
-        </div>
     </div>
 
     <script>
