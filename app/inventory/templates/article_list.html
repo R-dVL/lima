@@ -5,80 +5,101 @@
 {% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <div class="row">
+    <form method="GET" class="mb-4" id="filter-form">
+        <div class="row">
+            <div class="col-md-9">
+                {{ form.name }}
+            </div>
+        </div>
+    </form>
+
+    <div class="row" id="article-list">
         {% for item in items %}
-            <div class="col-12 col-md-4 mb-3">
-                <div class="card position-relative" style="border: 1px solid #6c757d; border-radius: 15px;">
+        <div class="col-12 col-md-4 mb-3">
+            <!-- Si la cantidad es 0, aplica la clase 'out-of-stock' -->
+            <div class="card position-relative {% if item.quantity == 0 %}out-of-stock{% endif %}"
+                style="border: 1px solid #6c757d; border-radius: 15px;">
+                
+                <!-- Dropdown button con las opciones Editar y Eliminar -->
+                <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
+                    <button class="btn p-0" 
+                            id="dropdownMenuLink{{ item.pk }}" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                            style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-ellipsis-vertical"></i>
+                    </button>
 
-                    <!-- Dropdown button with Font Awesome icon for vertical ellipsis -->
-                    <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
-                        <a class="text-muted" 
-                        role="button" 
-                        id="dropdownMenuLink{{ item.pk }}" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false"
-                        style="font-size: 1.5rem;">
-                            <i class="fas fa-ellipsis-vertical"></i>
-                        </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ item.pk }}">
+                        <li><a class="dropdown-item" href="{% url 'update_article' item.pk %}">Editar</a></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'delete_article' item.pk %}">Eliminar</a></li>
+                    </ul>
+                </div>
 
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ item.pk }}">
-                            <li><a class="dropdown-item" href="{% url 'update_article' item.pk %}">Editar</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'delete_article' item.pk %}">Eliminar</a></li>
-                        </ul>
-                    </div>
+                <div class="card-body d-flex align-items-start">
+                    <h5 class="card-title mb-0 flex-grow-1" style="font-weight: bold;">{{ item.name }}</h5>
+                </div>
 
-
-                    <div class="card-body d-flex align-items-start">
-                        <h5 class="card-title mb-0 flex-grow-1" style="font-weight: bold;">{{ item.name }}</h5>
-                    </div>
-
-                    <!-- Description in gray and smaller font -->
-                    <div class="card-body" style="color: #6c757d; font-size: 0.9rem;">
+                <div class="card-body" style="color: #6c757d; font-size: 0.9rem;">
+                    {% if item.description %}
                         <p>{{ item.description }}</p>
-                    </div>
+                    {% endif %}
+                </div>
 
-                    <!-- Card footer with flexbox to distribute content -->
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <!-- Total price (unit price x quantity) aligned to the left -->
-                        <span class="text-muted" style="font-size: 1.1rem;">
-                            {{ item.price|multiply:item.quantity }}€
-                        </span>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span class="text-muted" style="font-size: 1.1rem;">
+                        {{ item.price }}€
+                    </span>
 
-                        <!-- Div that pushes stock and buttons to the right -->
-                        <div class="ms-auto d-flex align-items-center">
-                            <span class="quantity me-3" style="font-size: 1rem;">{{ item.quantity }} in stock</span>
-
-                            <!-- Quantity buttons -->
-                            <a href="{% url 'decrease_quantity' item.pk %}"
-                               class="btn btn-secondary rounded-circle me-2 {% if item.quantity == 0 %}disabled{% endif %}"
-                               style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">-</a>
-                            <a href="{% url 'increase_quantity' item.pk %}"
-                               class="btn btn-secondary rounded-circle"
-                               style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">+</a>
-                        </div>
+                    <div class="ms-auto d-flex align-items-center">
+                        <span class="quantity me-3" style="font-size: 1rem;">{{ item.quantity }} en stock</span>
+                        <a href="{% url 'decrease_quantity' item.pk %}"
+                            class="btn btn-secondary rounded-circle me-2 {% if item.quantity == 0 %}disabled{% endif %}"
+                            style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">-</a>
+                        <a href="{% url 'increase_quantity' item.pk %}" class="btn btn-secondary rounded-circle"
+                            style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">+</a>
                     </div>
                 </div>
             </div>
+        </div>
         {% empty %}
-            <div class="alert alert-warning" role="alert" style="width: 100%;">
-                No items in inventory.
-            </div>
+        <div class="alert alert-warning" role="alert" style="width: 100%;">
+            No items in inventory.
+        </div>
         {% endfor %}
     </div>
 
-    <!-- Display the total price of all items -->
     <div class="d-flex justify-content-between align-items-center mt-4">
-        <!-- Total price of all items (aligned to the left) -->
         <div style="font-size: 1.2rem; font-weight: bold;">
-            Total: {{ total_price }}€
+            <!-- Total eliminado -->
         </div>
-
-        <!-- Button to add a new article -->
         <div>
             <a href="{% url 'create_article' %}" class="btn btn-primary btn-lg">
                 Añadir
             </a>
         </div>
     </div>
+
+    <script>
+        // Obtener el formulario y la lista de artículos
+        const filterForm = document.getElementById('filter-form');
+        const articleList = document.getElementById('article-list');
+
+        // Función para filtrar los artículos en vivo
+        filterForm.addEventListener('input', function () {
+            const query = filterForm.querySelector('input[name="name"]').value.toLowerCase();
+
+            // Filtrar los artículos basados en el texto del campo de búsqueda
+            const items = articleList.querySelectorAll('.col-md-4');
+            items.forEach(item => {
+                const itemName = item.querySelector('.card-title').textContent.toLowerCase();
+                if (itemName.includes(query)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </div>
 {% endblock %}
