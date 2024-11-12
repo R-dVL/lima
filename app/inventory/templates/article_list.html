@@ -21,7 +21,7 @@
     </form>
 
     <div class="row" id="article-list">
-        {% for item in items %}
+        {% for item in page_obj %}
         <div class="col-12 col-md-4 mb-3">
             <div class="card position-relative {% if item.quantity == 0 %}out-of-stock{% endif %}"
                 style="border: 1px solid #6c757d; border-radius: 15px;">
@@ -72,6 +72,21 @@
             No items in inventory.
         </div>
         {% endfor %}
+    </div>
+
+    <!-- Paginación -->
+    <div class="d-flex justify-content-center mt-4">
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-primary">Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">Anterior</a>
+            {% endif %}
+            <span class="mx-3">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Última</a>
+            {% endif %}
+        </div>
     </div>
 
     <script>
