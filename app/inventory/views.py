@@ -3,10 +3,13 @@ Views for the 'Inventory' app.
 
 This module handles the logic for managing articles in the inventory.
 """
-from django import forms
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+
+from .forms import ArticleForm
 from .models import Article
 
 @login_required
@@ -62,56 +65,41 @@ def decrease_quantity(request, pk):
     item.decrease_quantity(1)
     return redirect('article_list')
 
-class ArticleForm(forms.ModelForm):
+## CRUD ##
+# Create
+# pylint: disable=R0901
+class ArticleCreateView(CreateView):
     """
-    Form for adding or editing an article in the inventory.
-
-    Inherits from Django's ModelForm to generate a form based on the Article model.
+    Create Article form model.
     """
-    class Meta:
-        model = Article
-        fields = ['name', 'description', 'price', 'quantity']
+    model = Article
+    template_name = 'crud/create_article.html'
+    form_class = ArticleForm
+    success_url = reverse_lazy('article_list')
 
-@login_required
-def add_article(request):
+# Update
+class ArticleUpdateView(UpdateView):
     """
-    Handle the addition of a new article to the inventory.
-
-    Args:
-        request: The HTTP request object.
-
-    Returns:
-        Rendered HTML page for adding a new article or redirects to the article list upon success.
+    Update Article form model.
     """
-    if request.method == 'POST':
-        form = ArticleForm(request.POST)
-        # If the form is valid, save the article and redirect to the article list
-        if form.is_valid():
-            form.save()
-            return redirect('article_list')
-    else:
-        form = ArticleForm()  # Display an empty form for adding an article
-    return render(request, 'add_article.html', {'form': form})
+    model = Article
+    template_name = 'crud/update_article.html'
+    form_class = ArticleForm
+    success_url = reverse_lazy('article_list')
 
-@login_required
-def delete_article(request, pk):
+# Read
+class ArticleReadView(DetailView):
     """
-    Handle the deletion of an article from the inventory.
-
-    Args:
-        request: The HTTP request object.
-        pk: The primary key of the article to delete.
-
-    Returns:
-        Redirects to the article list page upon successful deletion.
+    Read Article form model.
     """
-    # Retrieve the article using the primary key (pk)
-    article = get_object_or_404(Article, pk=pk)
-    
-    if request.method == 'POST':
-        # If the form is submitted, delete the article
-        article.delete()
-        return redirect('article_list')
-    
-    # If the method is GET, display the delete confirmation page
-    return render(request, 'delete_article.html', {'article': article})
+    model = Article
+    template_name = 'crud/read_article.html'
+
+# Delete
+class ArticleDeleteView(DeleteView):
+    """
+    Delete Article form model.
+    """
+    model = Article
+    template_name = 'crud/delete_article.html'
+    success_url = reverse_lazy('article_list')

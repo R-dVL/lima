@@ -1,7 +1,7 @@
 .btn.disabled {
-    background-color: rgba(108, 117, 125, 0.5); /* Gris más claro con transparencia */
-    color: rgba(255, 255, 255, 0.5); /* Color de texto más claro */
-    pointer-events: none; /* Evitar clics en el botón deshabilitado */
+    background-color: rgba(108, 117, 125, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
 }
 
 .btn-circle {
@@ -16,9 +16,14 @@
 
 @media (max-width: 576px) {
     .card h5 {
-        font-size: 1.2rem; /* Tamaño de fuente más pequeño para móvil */
+        font-size: 1.2rem;
     }
     .btn {
-        font-size: 0.7rem; /* Ajustado el tamaño de los botones */
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+    .btn-circle {
+        width: 50px;
+        height: 50px;
     }
 }
