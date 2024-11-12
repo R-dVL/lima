@@ -16,7 +16,7 @@
                 </li>
                 {% if request.user.is_superuser %}
                 <li class="nav-item ms-3">
-                    <a class="btn btn-light btn-rounded" href="/admin"><i class="fas fa-user-secret pe-2"></i>Admin</a>
+                    <a class="nav-link mx-2" href="/admin"><i class="fas fa-user-secret pe-2"></i>Admin</a>
                 </li>
                 {% endif %}
                 {% if user.is_authenticated %}
