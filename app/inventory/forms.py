@@ -18,12 +18,12 @@ class ArticleForm(forms.ModelForm):
         widgets = {
             'price': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Amount in €',
+                'placeholder': 'Por unidad',
                 'min': '0',
             }),
             'quantity': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Units',
+                'placeholder': 'Unidades',
                 'min': '0',
             }),
         }
@@ -34,3 +34,6 @@ class ArticleForm(forms.ModelForm):
             'price': 'Precio',
             'quantity': 'Cantidad'
         }
+
+class ItemFilterForm(forms.Form):
+    name = forms.CharField(required=False, label='Nombre', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Buscar por nombre'}))

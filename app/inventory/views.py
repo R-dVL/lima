@@ -9,25 +9,38 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
-from .forms import ArticleForm
+from .forms import ArticleForm, ItemFilterForm
 from .models import Article
 
 @login_required
 def article_list(request):
     """
-    Render the list of articles in the inventory.
-
-    Args:
-        request: The HTTP request object.
-
-    Returns:
-        Rendered HTML page displaying the list of articles.
+    Render the list of articles in the inventory with filtering options.
+    Automatically sorted by quantity (ascending).
     """
-    # Retrieve all articles from the inventory
-    items = Article.objects.all()  # pylint: disable=E1101
-    # Calculate the total price of all articles (price * quantity)
+    # Retrieve all articles from the inventory and order them by quantity (ascending)
+    items = Article.objects.all().order_by('quantity')  # Ordenar por cantidad, de menos a más
+
+    # Initialize the filter form
+    form = ItemFilterForm(request.GET)
+
+    # Apply filters if the form is valid
+    if form.is_valid():
+        name = form.cleaned_data.get('name')
+
+        # Apply name filter (search for articles by name)
+        if name:
+            items = items.filter(name__icontains=name)  # Case-insensitive name search
+
+    # Calculate the total price of the filtered items
     total_price = sum(item.price * item.quantity for item in items)
-    return render(request, 'article_list.html', {'items': items, 'total_price': total_price})
+
+    # Render the page with the items and the filter form
+    return render(request, 'article_list.html', {
+        'items': items,
+        'total_price': total_price,
+        'form': form,
+    })
 
 @login_required
 def increase_quantity(request, pk):
