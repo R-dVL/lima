@@ -1,24 +1,7 @@
-.btn {
-    border-radius: 20px; /* Ajusta este valor para un forma ovalada más pronunciada */
-    background-color: #6c757d; /* Color gris */
-    color: white; /* Color del texto */
-    padding: 0.1rem 0.3rem; /* Reducción del padding para hacer los botones más pequeños */
-    font-size: 0.7rem; /* Tamaño de fuente más pequeño */
-}
-
 .btn.disabled {
     background-color: rgba(108, 117, 125, 0.5); /* Gris más claro con transparencia */
     color: rgba(255, 255, 255, 0.5); /* Color de texto más claro */
     pointer-events: none; /* Evitar clics en el botón deshabilitado */
-}
-
-@media (max-width: 576px) {
-    .card h5 {
-        font-size: 1.2rem; /* Tamaño de fuente más pequeño para móvil */
-    }
-    .btn {
-        font-size: 0.7rem; /* Ajustado el tamaño de los botones */
-    }
 }
 
 .btn-circle {
@@ -29,4 +12,13 @@
     justify-content: center;
     align-items: center;
     margin: 0 5px;
+}
+
+@media (max-width: 576px) {
+    .card h5 {
+        font-size: 1.2rem; /* Tamaño de fuente más pequeño para móvil */
+    }
+    .btn {
+        font-size: 0.7rem; /* Ajustado el tamaño de los botones */
+    }
 }

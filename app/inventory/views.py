@@ -20,13 +20,16 @@ def article_list(request):
     Returns:
         Rendered HTML page displaying the list of articles.
     """
+    # Retrieve all articles from the inventory
     items = Article.objects.all()  # pylint: disable=E1101
-    return render(request, 'article_list.html', {'items': items})
+    # Calculate the total price of all articles (price * quantity)
+    total_price = sum(item.price * item.quantity for item in items)
+    return render(request, 'article_list.html', {'items': items, 'total_price': total_price})
 
 @login_required
-def increase_quantity(request, pk):  # pylint: disable=unused-argument
+def increase_quantity(request, pk):
     """
-    Increase the quantity of an article at home.
+    Increase the quantity of an article in the inventory.
 
     Args:
         request: The HTTP request object.
@@ -35,14 +38,16 @@ def increase_quantity(request, pk):  # pylint: disable=unused-argument
     Returns:
         Redirects to the article list page.
     """
+    # Retrieve the article using the primary key (pk)
     item = get_object_or_404(Article, pk=pk)
+    # Increase the article's quantity by 1
     item.increase_quantity(1)
     return redirect('article_list')
 
 @login_required
-def decrease_quantity(request, pk):  # pylint: disable=unused-argument
+def decrease_quantity(request, pk):
     """
-    Decrease the quantity of an article at home.
+    Decrease the quantity of an article in the inventory.
 
     Args:
         request: The HTTP request object.
@@ -51,14 +56,21 @@ def decrease_quantity(request, pk):  # pylint: disable=unused-argument
     Returns:
         Redirects to the article list page.
     """
+    # Retrieve the article using the primary key (pk)
     item = get_object_or_404(Article, pk=pk)
+    # Decrease the article's quantity by 1
     item.decrease_quantity(1)
     return redirect('article_list')
 
 class ArticleForm(forms.ModelForm):
+    """
+    Form for adding or editing an article in the inventory.
+
+    Inherits from Django's ModelForm to generate a form based on the Article model.
+    """
     class Meta:
         model = Article
-        fields = ['name', 'quantity']
+        fields = ['name', 'description', 'price', 'quantity']
 
 @login_required
 def add_article(request):
@@ -69,15 +81,16 @@ def add_article(request):
         request: The HTTP request object.
 
     Returns:
-        Rendered HTML page for adding a new article or redirects to the article list.
+        Rendered HTML page for adding a new article or redirects to the article list upon success.
     """
     if request.method == 'POST':
         form = ArticleForm(request.POST)
+        # If the form is valid, save the article and redirect to the article list
         if form.is_valid():
             form.save()
             return redirect('article_list')
     else:
-        form = ArticleForm()
+        form = ArticleForm()  # Display an empty form for adding an article
     return render(request, 'add_article.html', {'form': form})
 
 @login_required
@@ -92,10 +105,13 @@ def delete_article(request, pk):
     Returns:
         Redirects to the article list page upon successful deletion.
     """
+    # Retrieve the article using the primary key (pk)
     article = get_object_or_404(Article, pk=pk)
     
     if request.method == 'POST':
+        # If the form is submitted, delete the article
         article.delete()
         return redirect('article_list')
     
+    # If the method is GET, display the delete confirmation page
     return render(request, 'delete_article.html', {'article': article})
