@@ -12,16 +12,8 @@ from . import views
 
 urlpatterns = [
     path('', views.article_list, name='article_list'),
+    path('add/', views.add_article, name='add_article'),
     path('increase/<int:pk>/', views.increase_quantity, name='increase_quantity'),
     path('decrease/<int:pk>/', views.decrease_quantity, name='decrease_quantity'),
-    path(
-        'increase-to-buy/<int:pk>/',
-        views.increase_quantity_to_buy,
-        name='increase_quantity_to_buy'
-        ),
-    path(
-        'decrease-to-buy/<int:pk>/',
-        views.decrease_quantity_to_buy,
-        name='decrease_quantity_to_buy'
-    ),
+    path('delete/<int:pk>/', views.delete_article, name='delete_article'),
 ]

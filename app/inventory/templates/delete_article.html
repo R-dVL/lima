@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    Borrar artículo | Inventario
+{% endblock %}
+{% block content %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  <div class="container mt-5">
+    <h3 class="mb-4">Borrar artículo</h3>
+
+    <div class="alert alert-warning">
+      <p>¿Estás seguro de que quieres borrar el artículo: <strong>{{ article.name }}</strong>?</p>
+    </div>
+
+    <div class="form-footer text-end">
+      <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+      <button type="submit" class="btn btn-danger">Borrar</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -8,8 +8,8 @@ class ArticleAdmin(admin.ModelAdmin):
     """
     Admin view: Article
     """
-    list_display = ('name', 'quantity_at_home', 'quantity_to_buy', 'price')
+    list_display = ('name', 'quantity', 'price')
     search_fields = ('name',)
-    list_filter = ('quantity_at_home',)
+    list_filter = ('quantity',)
 
 admin.site.register(Article, ArticleAdmin)
