@@ -28,12 +28,17 @@ jobs:
       - name: Analysing the code with pylint
         id: pylint
         run: |
-          pylint_output=$(pylint --rcfile=.pylintrc $(git ls-files '*.py'))
-          echo "$pylint_output"
+          # Ejecutar pylint y almacenar la salida en un archivo temporal
+          pylint --rcfile=.pylintrc $(git ls-files '*.py') > pylint_report.txt || true
 
-          score=$(echo "$pylint_output" | awk '/^Your code has been rated at/{print $7}' | cut -d'/' -f1)
+          # Mostrar el contenido completo del archivo en la consola
+          cat pylint_report.txt
+
+          # Extraer la puntuación desde el archivo
+          score=$(awk '/^Your code has been rated at/{print $7}' pylint_report.txt | cut -d'/' -f1)
           echo "Pylint score: $score"
 
+          # Verificar si la puntuación cumple con el umbral
           if (( $(echo "$score < 8.5" | bc -l) )); then
             echo "Pylint score ($score) is below 8.5. Failing the build."
             exit 1
