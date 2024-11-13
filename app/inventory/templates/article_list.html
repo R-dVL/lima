@@ -11,6 +11,12 @@
             <div class="flex-grow-1">
                 {{ form.name }}
             </div>
+
+            <!-- Icono de lupa -->
+            <button type="submit" class="btn p-0 ms-2" style="background-color: transparent; border: none;">
+                <i class="fas fa-search"></i>
+            </button>
+
             <!-- Botón Añadir -->
             <div class="ms-3">
                 <a href="{% url 'create_article' %}" class="btn btn-primary">
