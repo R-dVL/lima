@@ -26,5 +26,12 @@ jobs:
           pip install pylint
 
       - name: Analysing the code with pylint
+        id: pylint
         run: |
-          pylint --rcfile=.pylintrc $(git ls-files '*.py')
+          score=$(pylint --rcfile=.pylintrc $(git ls-files '*.py') | tee /dev/tty | awk '/^Your code has been rated at/{print $7}' | cut -d'/' -f1)
+          if (( $(echo "$score < 8.5" | bc -l) )); then
+            echo "Pylint score ($score) is below 8.5"
+            exit 1
+          else
+            echo "Pylint score ($score) meets the required threshold"
+          fi
