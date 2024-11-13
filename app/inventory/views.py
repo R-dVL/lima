@@ -20,7 +20,7 @@ def article_list(request):
     Automatically sorted by quantity (ascending).
     """
     # Retrieve all articles from the inventory and order them by quantity (ascending)
-    items = Article.objects.all().order_by('quantity')  # noqa: E1101
+    items = Article.objects.all().order_by('quantity')  # pylint: disable=E1101
 
     # Initialize the filter form
     form = ItemFilterForm(request.GET)
@@ -49,8 +49,7 @@ def article_list(request):
     })
 
 @login_required
-def increase_quantity(request, pk):
-    # noqa: W0613
+def increase_quantity(request, pk):  # pylint: disable=unused-argument
     """
     Increase the quantity of an article in the inventory.
 
@@ -69,7 +68,6 @@ def increase_quantity(request, pk):
 
 @login_required
 def decrease_quantity(request, pk):
-    # noqa: W0613
     """
     Decrease the quantity of an article in the inventory.
 
