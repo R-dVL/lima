@@ -1,3 +1,6 @@
+"""
+Custom filters for 'inventory' app
+"""
 from django import template
 
 register = template.Library()
