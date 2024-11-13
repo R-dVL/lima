@@ -4,7 +4,6 @@ Views for the 'Inventory' app.
 This module handles the logic for managing articles in the inventory.
 """
 from django.urls import reverse_lazy
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -36,17 +35,12 @@ def article_list(request):
         if name:
             articles = articles.filter(name__icontains=name)  # Case-insensitive name search
 
-    # Paginación: 9 artículos por página
-    paginator = Paginator(articles, 9)  # 9 articles per page
-    page_number = request.GET.get('page')  # Get the page number from the URL
-    page_obj = paginator.get_page(page_number)  # Get the page object
-
-    # Calculate the total price of the filtered articles
-    total_price = sum(article.price * article.quantity for article in page_obj)
+    # No pagination: Just pass the articles directly
+    total_price = sum(article.price * article.quantity for article in articles)
 
     # Render the page with the articles, the filter form, and the total global cost
     return render(request, 'article_list.html', {
-        'page_obj': page_obj,
+        'articles': articles,
         'total_price': total_price,
         'total_global_cost': total_global_cost,
         'form': form,
