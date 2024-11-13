@@ -34,8 +34,8 @@ jobs:
         id: get_tag
         run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
-      - name: Write version to /app/VERSION
-        run: echo "${{ steps.get_tag.outputs.tag }}" > /app/VERSION
+      - name: Write version to app/VERSION
+        run: echo "${{ steps.get_tag.outputs.tag }}" > app/VERSION
 
       - name: Build and push image
         uses: docker/build-push-action@v2
