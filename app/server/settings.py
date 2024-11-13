@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 VERSION_FILE = os.path.join(BASE_DIR, 'VERSION')
 
 try:
-    with open(VERSION_FILE) as f:
+    with open(VERSION_FILE, encoding='utf-8') as f:
         APP_VERSION = f.read().strip()
 except FileNotFoundError:
     APP_VERSION = "dev"
