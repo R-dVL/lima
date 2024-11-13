@@ -4,35 +4,28 @@
 {% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <form method="GET" class="mb-4" id="filter-form">
-        <div class="d-flex align-items-center">
-            <!-- Barra de búsqueda -->
-            <div class="flex-grow-1">
-                {{ form.name }}
-            </div>
-
-            <!-- Icono de lupa -->
-            <button type="submit" class="btn p-0 ms-2" style="background-color: transparent; border: none;">
-                <i class="fas fa-search"></i>
-            </button>
-
-            <!-- Botón Añadir -->
-            <div class="ms-3">
-                <a href="{% url 'create_article' %}" class="btn btn-primary">
-                    Añadir
-                </a>
-            </div>
+    <div class="d-flex align-items-center">
+        <!-- Barra de búsqueda -->
+        <div class="flex-grow-1">
+            <input type="text" id="search-input" class="form-control" placeholder="Buscar artículos..." oninput="filterArticles()">
         </div>
-    </form>
+
+        <!-- Botón Añadir -->
+        <div class="ms-3">
+            <a href="{% url 'create_article' %}" class="btn btn-primary">
+                Añadir
+            </a>
+        </div>
+    </div>
 
     <!-- Total Global Cost Alert -->
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info mt-3" role="alert"> <!-- Añadido mt-3 para margen superior -->
         Total a gastar para completar el inventario: {{ total_global_cost }}€
     </div>
 
     <div class="row" id="article-list">
-        {% for article in page_obj %}
-        <div class="col-12 col-md-4 mb-3">
+        {% for article in articles %}
+        <div class="col-12 col-md-4 mb-3 article-item" data-name="{{ article.name|lower }}">
             <div class="card position-relative {% if article.quantity == 0 %}out-of-stock{% endif %}"
                 style="border: 1px solid #6c757d; border-radius: 15px;">
 
@@ -83,29 +76,22 @@
         </div>
         {% endfor %}
     </div>
-
-    <!-- Paginación centrada y simplificada con información de página -->
-    <div class="d-flex justify-content-center my-4">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-                </li>
-            {% endif %}
-
-            <!-- Información de página actual y total de páginas -->
-            <li class="page-item disabled">
-                <span class="page-link">
-                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-                </span>
-            </li>
-
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
 </div>
+
+<script>
+    function filterArticles() {
+        const searchInput = document.getElementById('search-input').value.toLowerCase();
+        const articles = document.querySelectorAll('.article-item');
+
+        articles.forEach(article => {
+            const articleName = article.getAttribute('data-name');
+            if (articleName.includes(searchInput)) {
+                article.style.display = '';  // Mostrar el artículo si coincide
+            } else {
+                article.style.display = 'none';  // Ocultar el artículo si no coincide
+            }
+        });
+    }
+</script>
+
 {% endblock %}
