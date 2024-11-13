@@ -1,4 +1,5 @@
 [MASTER]
+load-plugins=pylint_django
 ignore=inventory.migrations
 ignore-patterns=
 ignore-paths=.*/migrations
