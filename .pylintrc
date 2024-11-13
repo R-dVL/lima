@@ -1,8 +1,11 @@
 [MASTER]
 load-plugins=pylint_django
+ignore=inventory.migrations
+ignore-patterns=
+ignore-paths=.*/migrations
 
 [MESSAGES CONTROL]
-# disable=E5110
+disable=E5110
 
 [django]
 # Django specific config
