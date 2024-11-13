@@ -24,6 +24,10 @@ except FileNotFoundError:
     APP_VERSION = "dev"
 
 def global_settings(request):
+    # noqa: W0613
+    """
+    Returns a dict with app version.
+    """
     return {
         'APP_VERSION': APP_VERSION,
     }

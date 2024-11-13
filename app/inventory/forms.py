@@ -12,6 +12,9 @@ class ArticleForm(forms.ModelForm):
     Inherits from Django's ModelForm to generate a form based on the Article model.
     """
     class Meta:
+        """
+        Meta
+        """
         model = Article
         fields = ['name', 'description', 'price', 'quantity']
 
@@ -36,4 +39,15 @@ class ArticleForm(forms.ModelForm):
         }
 
 class ItemFilterForm(forms.Form):
-    name = forms.CharField(required=False, label='Nombre', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Buscar por nombre'}))
+    """
+    Searchbar form configuration
+    """
+    name = forms.CharField(
+        required=False,
+        label='Nombre',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Buscar por nombre'
+            }
+        )
+    )
