@@ -20,7 +20,10 @@ def article_list(request):
     Automatically sorted by quantity (ascending).
     """
     # Retrieve all articles from the inventory and order them by quantity (ascending)
-    items = Article.objects.all().order_by('quantity')  # pylint: disable=E1101
+    articles = Article.objects.all().order_by('quantity')
+
+    # Calculate the total global cost to reach the desired quantity for all items
+    total_global_cost = sum(article.total_cost() for article in articles)
 
     # Initialize the filter form
     form = ItemFilterForm(request.GET)
@@ -31,20 +34,21 @@ def article_list(request):
 
         # Apply name filter (search for articles by name)
         if name:
-            items = items.filter(name__icontains=name)  # Case-insensitive name search
+            articles = articles.filter(name__icontains=name)  # Case-insensitive name search
 
     # Paginación: 9 artículos por página
-    paginator = Paginator(items, 9)  # 9 items per page
+    paginator = Paginator(articles, 9)  # 9 articles per page
     page_number = request.GET.get('page')  # Get the page number from the URL
     page_obj = paginator.get_page(page_number)  # Get the page object
 
-    # Calculate the total price of the filtered items
-    total_price = sum(item.price * item.quantity for item in page_obj)
+    # Calculate the total price of the filtered articles
+    total_price = sum(article.price * article.quantity for article in page_obj)
 
-    # Render the page with the items and the filter form
+    # Render the page with the articles, the filter form, and the total global cost
     return render(request, 'article_list.html', {
         'page_obj': page_obj,
         'total_price': total_price,
+        'total_global_cost': total_global_cost,
         'form': form,
     })
 
@@ -61,9 +65,9 @@ def increase_quantity(request, pk):  # pylint: disable=unused-argument
         Redirects to the article list page.
     """
     # Retrieve the article using the primary key (pk)
-    item = get_object_or_404(Article, pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     # Increase the article's quantity by 1
-    item.increase_quantity(1)
+    article.increase_quantity(1)
     return redirect('article_list')
 
 @login_required
@@ -79,9 +83,9 @@ def decrease_quantity(request, pk):
         Redirects to the article list page.
     """
     # Retrieve the article using the primary key (pk)
-    item = get_object_or_404(Article, pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     # Decrease the article's quantity by 1
-    item.decrease_quantity(1)
+    article.decrease_quantity(1)
     return redirect('article_list')
 
 ## CRUD ##

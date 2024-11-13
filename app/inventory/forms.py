@@ -16,7 +16,7 @@ class ArticleForm(forms.ModelForm):
         Meta
         """
         model = Article
-        fields = ['name', 'description', 'price', 'quantity']
+        fields = ['name', 'description', 'price', 'quantity', 'quantity_to_buy']
 
         widgets = {
             'price': forms.NumberInput(attrs={
@@ -35,7 +35,8 @@ class ArticleForm(forms.ModelForm):
             'name': 'Nombre',
             'description': 'Descripción',
             'price': 'Precio',
-            'quantity': 'Cantidad'
+            'quantity': 'Cantidad',
+            'quantity_to_buy': 'Cantidad a comprar'
         }
 
 class ItemFilterForm(forms.Form):
