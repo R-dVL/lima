@@ -28,10 +28,15 @@ jobs:
       - name: Analysing the code with pylint
         id: pylint
         run: |
-          score=$(pylint --rcfile=.pylintrc $(git ls-files '*.py') | tee /dev/tty | awk '/^Your code has been rated at/{print $7}' | cut -d'/' -f1)
+          pylint_output=$(pylint --rcfile=.pylintrc $(git ls-files '*.py'))
+          echo "$pylint_output"
+
+          score=$(echo "$pylint_output" | awk '/^Your code has been rated at/{print $7}' | cut -d'/' -f1)
+          echo "Pylint score: $score"
+
           if (( $(echo "$score < 8.5" | bc -l) )); then
-            echo "Pylint score ($score) is below 8.5"
+            echo "Pylint score ($score) is below 8.5. Failing the build."
             exit 1
           else
-            echo "Pylint score ($score) meets the required threshold"
+            echo "Pylint score ($score) meets the required threshold. Success."
           fi
