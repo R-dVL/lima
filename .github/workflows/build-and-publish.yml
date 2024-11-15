@@ -45,6 +45,9 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag.outputs.tag }}
             ghcr.io/${{ github.repository }}/${{ env.IMAGE_NAME }}:latest
+        env:
+          DJANGO_DEBUG: 'False'
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
   create-release:
     name: Create release
