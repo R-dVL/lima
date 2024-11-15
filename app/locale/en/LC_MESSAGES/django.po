@@ -46,36 +46,36 @@ msgstr ""
 msgid "Amount to buy"
 msgstr ""
 
-#: inventory/templates/article_list.html:4 templates/_navbar.html:19
+#: inventory/templates/item_list.html:4 templates/_navbar.html:19
 msgid "Inventory"
 msgstr ""
 
-#: inventory/templates/article_list.html:11
-msgid "Search articles..."
+#: inventory/templates/item_list.html:11
+msgid "Search items..."
 msgstr ""
 
-#: inventory/templates/article_list.html:17
+#: inventory/templates/item_list.html:17
 msgid "Add"
 msgstr ""
 
-#: inventory/templates/article_list.html:24
+#: inventory/templates/item_list.html:24
 msgid "Total to spend to complete inventory:"
 msgstr ""
 
-#: inventory/templates/article_list.html:44
+#: inventory/templates/item_list.html:44
 msgid "Edit"
 msgstr ""
 
-#: inventory/templates/article_list.html:45
+#: inventory/templates/item_list.html:45
 msgid "Delete"
 msgstr ""
 
-#: inventory/templates/article_list.html:61
+#: inventory/templates/item_list.html:61
 msgid "Total"
 msgstr ""
 
-#: inventory/templates/article_list.html:77
-msgid "No articles in inventory."
+#: inventory/templates/item_list.html:77
+msgid "No items in inventory."
 msgstr ""
 
 #: server/settings.py:138

@@ -37,3 +37,12 @@
 .card.out-of-stock .card-body {
     color: #333;
 }
+
+.dropdown-menu {
+    z-index: 1050;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}

@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block title %}
-    Borrar artículo | Inventario
+    Borrar lista | Inventario
 {% endblock %}
 {% block content %}
 
 <form method="post" action="">
   {% csrf_token %}
 
+  <!-- Hidden field for list_pk -->
+  <input type="hidden" name="list_pk" value="{{ list.list.pk }}">
+
   <div class="container mt-5">
-    <h3 class="mb-4">Borrar artículo</h3>
+    <h3 class="mb-4">Borrar lista</h3>
 
     <div class="alert alert-warning">
-      <p>¿Estás seguro de que quieres borrar el artículo: <strong>{{ article.name }}</strong>?</p>
+      <p>¿Estás seguro de que quieres borrar la lista: <strong>{{ list.name }}</strong>?</p>
     </div>
 
     <div class="form-footer text-end">
-      <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+      <a href="{% url 'lists' %}" class="btn btn-secondary me-2">Cancelar</a>
       <button type="submit" class="btn btn-danger">Borrar</button>
     </div>
   </div>

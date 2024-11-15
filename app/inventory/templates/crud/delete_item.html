@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    Borrar artículo | Inventario
+{% endblock %}
+{% block content %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  <!-- Hidden field for list_pk -->
+  <input type="hidden" name="list_pk" value="{{ item.list.pk }}">
+
+  <div class="container mt-5">
+    <h3 class="mb-4">Borrar artículo</h3>
+
+    <div class="alert alert-warning">
+      <p>¿Estás seguro de que quieres borrar el artículo: <strong>{{ item.name }}</strong>?</p>
+    </div>
+
+    <div class="form-footer text-end">
+      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
+      <button type="submit" class="btn btn-danger">Borrar</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

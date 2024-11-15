@@ -10,21 +10,21 @@ Detalle articulo | Lima
     <div class="card">
         <div class="card-body">
             <div class="mb-3">
-                <strong>Nombre del artículo:</strong> {{ article.name }}
+                <strong>Nombre del artículo:</strong> {{ item.name }}
             </div>
             <div class="mb-3">
-                <strong>Descripción:</strong> {{ article.description }}
+                <strong>Descripción:</strong> {{ item.description }}
             </div>
             <div class="mb-3">
-                <strong>Precio:</strong> {{ article.price }} €
+                <strong>Precio:</strong> {{ item.price }} €
             </div>
             <div class="mb-3">
-                <strong>Cantidad:</strong> {{ article.quantity }}
+                <strong>Cantidad:</strong> {{ item.quantity }}
             </div>
         </div>
 
         <div class="mt-4 text-end">
-            <a href="{% url 'article_list' %}" class="btn btn-secondary">Cerrar</a>
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">Cerrar</a>
         </div>
     </div>
 
