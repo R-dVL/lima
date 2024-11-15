@@ -1,30 +1,30 @@
 from django.contrib import admin
-from .models import Article, List
+from .models import Item, List
 
-class ArticleInline(admin.TabularInline):
+class ItemInline(admin.TabularInline):
     """
-    Inline configuration for Articles.
+    Inline configuration for Items.
     """
-    model = Article
+    model = Item
     extra = 1  # Number of empty forms to display by default in the admin
 
 class ListAdmin(admin.ModelAdmin):
     """
-    Admin view: List with inlined Articles.
+    Admin view: List with inlined Items.
     """
     list_display = ('name', 'description')
     search_fields = ('name',)
     list_filter = ('name',)
-    inlines = [ArticleInline]  # Add this line to inline the Article model
+    inlines = [ItemInline]  # Add this line to inline the Item model
 
 admin.site.register(List, ListAdmin)
 
-class ArticleAdmin(admin.ModelAdmin):
+class ItemAdmin(admin.ModelAdmin):
     """
-    Admin view: Article
+    Admin view: Item
     """
-    list_display = ('name', 'quantity', 'price', 'list')  # Add the 'list' field to the display
+    list_display = ('name', 'amount', 'price', 'list')  # Add the 'list' field to the display
     search_fields = ('name',)
-    list_filter = ('quantity',)
+    list_filter = ('amount',)
 
-admin.site.register(Article, ArticleAdmin)
+admin.site.register(Item, ItemAdmin)

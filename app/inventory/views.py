@@ -1,7 +1,7 @@
 """
 Views for the 'Inventory' app.
 
-This module handles the logic for managing articles in the inventory.
+This module handles the logic for managing items in the inventory.
 """
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
@@ -9,13 +9,13 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
-from .forms import ArticleForm
-from .models import Article, List
+from .forms import ItemForm
+from .models import Item, List
 
 @login_required
 def lists(request):
     """
-    Render the list of lists, with links to the article list of each list.
+    Render the list of lists, with links to the item list of each list.
     """
     lists = List.objects.all()
 
@@ -24,57 +24,57 @@ def lists(request):
 @login_required
 def list_detail(request, pk):
     """
-    Render the list of articles in the selected list.
+    Render the list of items in the selected list.
     """
     list_obj = get_object_or_404(List, pk=pk)
-    articles = list_obj.articles.all()
+    items = list_obj.items.all()
 
-    # Calculate the total global cost for the articles in this list
-    total_global_cost = sum(article.total_cost() for article in articles)
+    # Calculate the total global cost for the items in this list
+    total_global_cost = sum(item.total_cost() for item in items)
 
     return render(request, 'list_detail.html', {
         'list': list_obj,
-        'articles': articles,
+        'items': items,
         'total_global_cost': total_global_cost,
     })
 
 @login_required
-def increase_quantity(request, pk):
+def increase_amount(request, pk):
     """
-    Increase the quantity of an article in the inventory.
+    Increase the amount of an item in the inventory.
     """
-    article = get_object_or_404(Article, pk=pk)
-    list_pk = article.list.pk  # Get the List associated with the article
-    article.increase_quantity(1)
+    item = get_object_or_404(Item, pk=pk)
+    list_pk = item.list.pk  # Get the List associated with the item
+    item.increase_amount(1)
     return redirect('list_detail', pk=list_pk)
 
 @login_required
-def decrease_quantity(request, pk):
+def decrease_amount(request, pk):
     """
-    Decrease the quantity of an article in the inventory.
+    Decrease the amount of an item in the inventory.
     """
-    article = get_object_or_404(Article, pk=pk)
-    list_pk = article.list.pk  # Get the List associated with the article
-    article.decrease_quantity(1)
+    item = get_object_or_404(Item, pk=pk)
+    list_pk = item.list.pk  # Get the List associated with the item
+    item.decrease_amount(1)
     return redirect('list_detail', pk=list_pk)
 
 ## CRUD ##
 # Create
 # pylint: disable=R0901
-class ArticleCreateView(CreateView):
+class ItemCreateView(CreateView):
     """
-    Create a new Article for a specific Inventory List.
+    Create a new Item for a specific Inventory List.
     """
-    model = Article
-    template_name = 'crud/create_article.html'
-    form_class = ArticleForm
+    model = Item
+    template_name = 'crud/create_item.html'
+    form_class = ItemForm
 
     def form_valid(self, form):
         # Get the List object based on the 'pk' from the URL
         list_pk = self.kwargs.get('pk')  # Retrieve the list_pk from URL kwargs
         inventory_list = get_object_or_404(List, pk=list_pk)
 
-        # Assign the inventory list to the new Article instance
+        # Assign the inventory list to the new Item instance
         form.instance.list = inventory_list  # Ensure the ForeignKey is set
 
         # Save the form and redirect to the 'list_detail' view
@@ -90,25 +90,25 @@ class ArticleCreateView(CreateView):
 
 
 # Read
-class ArticleReadView(DetailView):
+class ItemReadView(DetailView):
     """
-    Read Article form model.
+    Read Item form model.
     """
-    model = Article
-    template_name = 'crud/read_article.html'
+    model = Item
+    template_name = 'crud/read_item.html'
 
 # Update
-class ArticleUpdateView(UpdateView):
+class ItemUpdateView(UpdateView):
     """
-    Update Article form model.
+    Update Item form model.
     """
-    model = Article
-    template_name = 'crud/update_article.html'
-    form_class = ArticleForm
+    model = Item
+    template_name = 'crud/update_item.html'
+    form_class = ItemForm
 
     def form_valid(self, form):
-        # Save the form and update the article
-        article = form.save()
+        # Save the form and update the item
+        item = form.save()
 
         # Get the list_pk from the form
         list_pk = self.request.POST.get('list_pk')  # Get the list's primary key from the form
@@ -122,14 +122,14 @@ class ArticleUpdateView(UpdateView):
         return reverse_lazy('list_detail', kwargs={'pk': list_pk})
 
 # Delete
-class ArticleDeleteView(DeleteView):
+class ItemDeleteView(DeleteView):
     """
-    Delete Article form model.
+    Delete Item form model.
     """
-    model = Article
-    template_name = 'crud/delete_article.html'
+    model = Item
+    template_name = 'crud/delete_item.html'
 
     def get_success_url(self):
-        # Redirect to the list_detail view of the List this article belongs to
-        list_pk = self.object.list.pk  # Get the List object from the deleted Article
+        # Redirect to the list_detail view of the List this item belongs to
+        list_pk = self.object.list.pk  # Get the List object from the deleted Item
         return reverse_lazy('list_detail', kwargs={'pk': list_pk})

@@ -10,22 +10,22 @@ class List(models.Model):
     def __str__(self):
         return self.name
 
-class Article(models.Model):
-    """Represents an article in the inventory.
+class Item(models.Model):
+    """Represents an item in the inventory.
 
     Attributes:
-        name (str): The name of the article.
-        description (str): Brief description of the article.
-        quantity (int): The quantity of the article currently in stock.
-        quantity_to_buy (int): The quantity of the article desired in stock.
-        price (Decimal, optional): The price of the article. It can be null or blank.
+        name (str): The name of the item.
+        description (str): Brief description of the item.
+        amount (int): The amount of the item currently in stock.
+        amount_to_buy (int): The amount of the item desired in stock.
+        price (Decimal, optional): The price of the item. It can be null or blank.
 
     Methods:
-        increase_quantity(amount): Increases the quantity of the article in stick.
-        decrease_quantity(amount): Decreases the quantity of the article in stock,
+        increase_amount(amount): Increases the amount of the item in stick.
+        decrease_amount(amount): Decreases the amount of the item in stock,
             ensuring it does not go below zero.
         total_cost(self): Calculates the price of the amount to buy to reach the
-            desired stock quantity.
+            desired stock amount.
     """
     name = models.CharField(max_length=255)
     description = models.CharField(
@@ -33,36 +33,36 @@ class Article(models.Model):
         null=True,
         blank=True
     )
-    quantity = models.IntegerField(default=0)
-    quantity_to_buy = models.IntegerField(default=0)
+    amount = models.IntegerField(default=0)
+    amount_to_buy = models.IntegerField(default=0)
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0
     )
-    list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='articles')
+    list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='items')
 
-    def increase_quantity(self, amount):
+    def increase_amount(self, amount):
         """
         Increases the amount in stock.
         """
-        self.quantity += amount
+        self.amount += amount
         self.save()
 
-    def decrease_quantity(self, amount):
+    def decrease_amount(self, amount):
         """
         Decreases the amount in stock.
         """
-        if self.quantity > 0:
-            self.quantity -= amount
+        if self.amount > 0:
+            self.amount -= amount
         self.save()
 
     def total_cost(self):
         """
-        Calculates the total cost for the remaining quantity needed to reach `quantity_to_buy`.
+        Calculates the total cost for the remaining amount needed to reach `amount_to_buy`.
         """
-        quantity_needed = max(self.quantity_to_buy - self.quantity, 0)
-        return quantity_needed * self.price
+        amount_needed = max(self.amount_to_buy - self.amount, 0)
+        return amount_needed * self.price
 
     def __str__(self):
         return self.name

@@ -8,12 +8,12 @@
     <div class="d-flex align-items-center">
         <!-- Search bar -->
         <div class="flex-grow-1">
-            <input type="text" id="search-input" class="form-control" placeholder="{% trans 'Search articles...' %}" oninput="filterArticles()">
+            <input type="text" id="search-input" class="form-control" placeholder="{% trans 'Search items...' %}" oninput="filterItems()">
         </div>
 
         <!-- Add button -->
         <div class="ms-3">
-            <a href="{% url 'create_article' pk=list.pk %}" class="btn btn-primary">
+            <a href="{% url 'create_item' pk=list.pk %}" class="btn btn-primary">
                 {% trans "Add" %}
             </a>
         </div>
@@ -24,49 +24,49 @@
         {% trans "Total to spend to complete inventory:" %} {{ total_global_cost }}€
     </div>
 
-    <!-- Article list -->
-    <div class="row" id="article-list">
-        {% for article in articles %}
-        <div class="col-12 col-md-4 mb-3 article-item" data-name="{{ article.name|lower }}">
-            <div class="card position-relative {% if article.quantity == 0 %}out-of-stock{% endif %}"
+    <!-- Item list -->
+    <div class="row" id="item-list">
+        {% for item in items %}
+        <div class="col-12 col-md-4 mb-3 item-item" data-name="{{ item.name|lower }}">
+            <div class="card position-relative {% if item.amount == 0 %}out-of-stock{% endif %}"
                 style="border: 1px solid #6c757d; border-radius: 15px;">
 
                 <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
                     <button class="btn p-0"
-                            id="dropdownMenuLink{{ article.pk }}"
+                            id="dropdownMenuLink{{ item.pk }}"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                             style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
                         <i class="fas fa-ellipsis-vertical"></i>
                     </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ article.pk }}">
-                        <li><a class="dropdown-item" href="{% url 'update_article' article.pk %}">{% trans "Edit" %}</a></li>
-                        <li><a class="dropdown-item text-danger" href="{% url 'delete_article' article.pk %}">{% trans "Delete" %}</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ item.pk }}">
+                        <li><a class="dropdown-item" href="{% url 'update_item' item.pk %}">{% trans "Edit" %}</a></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'delete_item' item.pk %}">{% trans "Delete" %}</a></li>
                     </ul>
                 </div>
 
                 <div class="card-body d-flex align-items-start">
-                    <h5 class="card-title mb-0 flex-grow-1" style="font-weight: bold;">{{ article.name }}</h5>
+                    <h5 class="card-title mb-0 flex-grow-1" style="font-weight: bold;">{{ item.name }}</h5>
                 </div>
 
                 <div class="card-body" style="color: #6c757d; font-size: 0.9rem;">
-                    {% if article.description %}
-                        <p>{{ article.description }}</p>
+                    {% if item.description %}
+                        <p>{{ item.description }}</p>
                     {% endif %}
                 </div>
 
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <span class="text-muted" style="font-size: 1.1rem;">
-                        {% trans "Total" %} {{ article.total_cost }}€
+                        {% trans "Total" %} {{ item.total_cost }}€
                     </span>
 
                     <div class="ms-auto d-flex align-items-center">
-                        <span class="quantity me-3" style="font-size: 1rem;">{{ article.quantity }}/{{ article.quantity_to_buy }}</span>
-                        <a href="{% url 'decrease_quantity' article.pk %}"
-                           class="btn btn-secondary rounded-circle me-2 {% if article.quantity == 0 %}disabled{% endif %}"
+                        <span class="amount me-3" style="font-size: 1rem;">{{ item.amount }}/{{ item.amount_to_buy }}</span>
+                        <a href="{% url 'decrease_amount' item.pk %}"
+                           class="btn btn-secondary rounded-circle me-2 {% if item.amount == 0 %}disabled{% endif %}"
                            style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">-</a>
-                        <a href="{% url 'increase_quantity' article.pk %}" class="btn btn-secondary rounded-circle"
+                        <a href="{% url 'increase_amount' item.pk %}" class="btn btn-secondary rounded-circle"
                            style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">+</a>
                     </div>
                 </div>
@@ -74,23 +74,23 @@
         </div>
         {% empty %}
         <div class="alert alert-warning" role="alert" style="width: 100%;">
-            {% trans "No articles in inventory." %}
+            {% trans "No items in inventory." %}
         </div>
         {% endfor %}
     </div>
 </div>
 
 <script>
-    function filterArticles() {
+    function filterItems() {
         const searchInput = document.getElementById('search-input').value.toLowerCase();
-        const articles = document.querySelectorAll('.article-item');
+        const items = document.querySelectorAll('.item-item');
 
-        articles.forEach(article => {
-            const articleName = article.getAttribute('data-name');
-            if (articleName.includes(searchInput)) {
-                article.style.display = '';  // Show article
+        items.forEach(item => {
+            const itemName = item.getAttribute('data-name');
+            if (itemName.includes(searchInput)) {
+                item.style.display = '';  // Show item
             } else {
-                article.style.display = 'none';  // Hide article
+                item.style.display = 'none';  // Hide item
             }
         });
     }

@@ -1,36 +1,29 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block title %}
-    Añadir artículo | Inventario
+    Actualizar artículo | Lima
 {% endblock %}
 {% block content %}
 
-<form method="post" action="" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="hidden" name="list_pk" value="{{ list.pk }}">
+<div class="container mt-5">
+  <h3 class="mb-4">Actualizar artículo</h3>
 
-  <!-- Header -->
-  <div class="header mb-4">
-    <h3>Añadir Nuevo Artículo</h3>
-  </div>
+  <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
 
-  <!-- Form body -->
-  <div class="form-body">
     <!-- Specific errors -->
-    <div class="{% if form.non_field_errors %}is-invalid{% endif %} mb-3">
+    <div class="{% if form.non_field_errors %}is-invalid{% endif %} mb-2">
       {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-          {{ error }}
-        </div>
+        <div class="alert alert-danger">{{ error }}</div>
       {% endfor %}
     </div>
 
-    <!-- Loop over 'Article' fields -->
+    <!-- Loop over 'Item' fields -->
     {% for field in form %}
       <div class="form-group mb-3">
 
         <!-- Field label -->
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
 
         <!-- Input fields-->
         {% if field.field.widget.input_type == "checkbox" %}
@@ -46,19 +39,21 @@
         {% endif %}
 
         <!-- Shows validation errors -->
-        <div class="invalid-feedback d-block">
+        <div class="invalid-feedback">
           {% for error in field.errors %}
-            <p class="help-block">{{ error }}</p>
+            <p class="text-danger">{{ error }}</p>
           {% endfor %}
         </div>
       </div>
     {% endfor %}
-  </div>
 
-  <!-- Footer -->
-  <div class="form-footer mt-3 text-end">
-    <a href="{% url 'list_detail' pk=list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
-    <button type="submit" class="btn btn-primary">Añadir</button>
-  </div>
-</form>
+    <!-- Hidden input for list_pk -->
+    <input type="hidden" name="list_pk" value="{{ item.list.pk }}">
+
+    <div class="form-footer text-end">
+      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </div>
+  </form>
+</div>
 {% endblock %}
