@@ -1,5 +1,5 @@
 <p align="center">
 <img src="app/static/assets/icons/lima-with-name.png" width="300">
 </p>
-
-# Lima
+---
+Inventory organization WebApp.
