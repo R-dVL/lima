@@ -39,5 +39,10 @@
 }
 
 .dropdown-menu {
-    z-index: 1050; /* Ensure it appears above other content */
+    z-index: 1050;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
 }

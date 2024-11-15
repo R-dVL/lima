@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block title %}
-    {% trans "Lists" %} | Inventory
+{% trans "Lists" %} | Inventory
 {% endblock %}
 {% block content %}
 <div class="container mt-5">
@@ -27,7 +27,7 @@
             <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
                 <div class="card h-100">
                     {% if list.image %}
-                    <img src="{{ list.image.url }}" class="card-img-top" alt="{{ list.name }}">
+                    <img src="{{ list.image.url }}" class="card-img-top img-fluid" alt="{{ list.name }}">
                     {% else %}
                     <div class="card-img-top d-flex align-items-center justify-content-center text-muted"
                         style="height: 200px; background-color: #f8f9fa;">
@@ -40,10 +40,11 @@
                             style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
                             <i class="fas fa-ellipsis-vertical"></i>
                         </button>
-
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ list.pk }}">
-                            <li><a class="dropdown-item" href="{% url 'update_list' list.pk %}">{% trans "Edit" %}</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'delete_list' list.pk %}">{% trans "Delete" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_list' list.pk %}">{% trans "Edit" %}</a>
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'delete_list' list.pk %}">{% trans
+                                    "Delete" %}</a></li>
                         </ul>
                     </div>
                     <div class="card-footer text-center">
