@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-15 17:12+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inventory/forms.py:23
+msgid "Per unit"
+msgstr "Por unidad"
+
+#: inventory/forms.py:28
+msgid "Units"
+msgstr "Unidades"
+
+#: inventory/forms.py:34
+msgid "Name"
+msgstr "Nombre"
+
+#: inventory/forms.py:35
+msgid "Description"
+msgstr "Descripción"
+
+#: inventory/forms.py:36
+msgid "Price"
+msgstr "Precio"
+
+#: inventory/forms.py:37
+msgid "Amount"
+msgstr "Cantidad"
+
+#: inventory/forms.py:38
+msgid "Amount to buy"
+msgstr "Cantidad a comprar"
+
+#: inventory/templates/article_list.html:4 templates/_navbar.html:19
+msgid "Inventory"
+msgstr "Inventario"
+
+#: inventory/templates/article_list.html:11
+msgid "Search articles..."
+msgstr "Buscar artículos..."
+
+#: inventory/templates/article_list.html:17
+msgid "Add"
+msgstr "Añadir"
+
+#: inventory/templates/article_list.html:24
+msgid "Total to spend to complete inventory:"
+msgstr "Total a gastar para completar el inventario:"
+
+#: inventory/templates/article_list.html:44
+msgid "Edit"
+msgstr "Editar"
+
+#: inventory/templates/article_list.html:45
+msgid "Delete"
+msgstr "Eliminar"
+
+#: inventory/templates/article_list.html:61
+msgid "Total"
+msgstr "Total"
+
+#: inventory/templates/article_list.html:77
+msgid "No articles in inventory."
+msgstr "No hay articulos en el inventario."
+
+#: server/settings.py:138
+msgid "English"
+msgstr "Inglés"
+
+#: server/settings.py:139
+msgid "Español"
+msgstr "Español"
+
+#: templates/_navbar.html:24
+msgid "Admin"
+msgstr "Admin"
+
+#~ msgid "Spanish"
+#~ msgstr "Español"
