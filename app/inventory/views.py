@@ -24,39 +24,20 @@ def article_list(request):
     # Calculate the total global cost to reach the desired quantity for all items
     total_global_cost = sum(article.total_cost() for article in articles)
 
-    # Initialize the filter form
-    form = ItemFilterForm(request.GET)
-
-    # Apply filters if the form is valid
-    if form.is_valid():
-        name = form.cleaned_data.get('name')
-
-        # Apply name filter (search for articles by name)
-        if name:
-            articles = articles.filter(name__icontains=name)  # Case-insensitive name search
-
-    # No pagination: Just pass the articles directly
+    # Article total price to reach desired stock
     total_price = sum(article.price * article.quantity for article in articles)
 
     # Render the page with the articles, the filter form, and the total global cost
     return render(request, 'article_list.html', {
         'articles': articles,
         'total_price': total_price,
-        'total_global_cost': total_global_cost,
-        'form': form,
+        'total_global_cost': total_global_cost
     })
 
 @login_required
 def increase_quantity(request, pk):  # pylint: disable=unused-argument
     """
     Increase the quantity of an article in the inventory.
-
-    Args:
-        request: The HTTP request object.
-        pk: The primary key of the article to increase.
-
-    Returns:
-        Redirects to the article list page.
     """
     # Retrieve the article using the primary key (pk)
     article = get_object_or_404(Article, pk=pk)
@@ -68,13 +49,6 @@ def increase_quantity(request, pk):  # pylint: disable=unused-argument
 def decrease_quantity(request, pk):
     """
     Decrease the quantity of an article in the inventory.
-
-    Args:
-        request: The HTTP request object.
-        pk: The primary key of the article to decrease.
-
-    Returns:
-        Redirects to the article list page.
     """
     # Retrieve the article using the primary key (pk)
     article = get_object_or_404(Article, pk=pk)
@@ -94,6 +68,14 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     success_url = reverse_lazy('article_list')
 
+# Read
+class ArticleReadView(DetailView):
+    """
+    Read Article form model.
+    """
+    model = Article
+    template_name = 'crud/read_article.html'
+
 # Update
 class ArticleUpdateView(UpdateView):
     """
@@ -103,14 +85,6 @@ class ArticleUpdateView(UpdateView):
     template_name = 'crud/update_article.html'
     form_class = ArticleForm
     success_url = reverse_lazy('article_list')
-
-# Read
-class ArticleReadView(DetailView):
-    """
-    Read Article form model.
-    """
-    model = Article
-    template_name = 'crud/read_article.html'
 
 # Delete
 class ArticleDeleteView(DeleteView):

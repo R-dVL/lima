@@ -8,8 +8,6 @@ from .models import Article
 class ArticleForm(forms.ModelForm):
     """
     Form for adding or editing an article in the inventory.
-
-    Inherits from Django's ModelForm to generate a form based on the Article model.
     """
     class Meta:
         """

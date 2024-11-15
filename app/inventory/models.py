@@ -10,9 +10,9 @@ class Article(models.Model):
 
     Attributes:
         name (str): The name of the article.
-        descriptio (str): Brief description of the article.
+        description (str): Brief description of the article.
         quantity (int): The quantity of the article currently in stock.
-        quantity (int): The quantity of the article desired in stock.
+        quantity_to_buy (int): The quantity of the article desired in stock.
         price (Decimal, optional): The price of the article. It can be null or blank.
 
     Methods:

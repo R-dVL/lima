@@ -11,21 +11,21 @@
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <!-- Mostrar errores no asociados a campos específicos -->
+    <!-- Specific errors -->
     <div class="{% if form.non_field_errors %}is-invalid{% endif %} mb-2">
       {% for error in form.non_field_errors %}
         <div class="alert alert-danger">{{ error }}</div>
       {% endfor %}
     </div>
 
-    <!-- Recorrer los campos del formulario -->
+    <!-- Loop over 'Article' fields -->
     {% for field in form %}
       <div class="form-group mb-3">
 
-        <!-- Etiqueta del campo -->
+        <!-- Field label -->
         <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
 
-        <!-- Campo DateField y Checkbox Field -->
+        <!-- Input fields-->
         {% if field.field.widget.input_type == "checkbox" %}
           <div class="form-check">
             {% render_field field class="form-check-input" %}
@@ -34,11 +34,11 @@
         {% elif field.field.widget.input_type == "date" %}
           {% render_field field class="form-control" type="date" %}
         {% else %}
-          <!-- Renderiza otros campos normales (input, text, number, etc.) -->
+          <!-- Read Fields -->
           {% render_field field class="form-control" placeholder=field.label %}
         {% endif %}
 
-        <!-- Mostrar errores de validación del campo -->
+        <!-- Shows validation errors -->
         <div class="invalid-feedback">
           {% for error in field.errors %}
             <p class="text-danger">{{ error }}</p>
