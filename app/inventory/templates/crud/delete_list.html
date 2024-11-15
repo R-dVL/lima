@@ -9,17 +9,17 @@
   {% csrf_token %}
 
   <!-- Hidden field for list_pk -->
-  <input type="hidden" name="list_pk" value="{{ item.list.pk }}">
+  <input type="hidden" name="list_pk" value="{{ list.list.pk }}">
 
   <div class="container mt-5">
     <h3 class="mb-4">Borrar lista</h3>
 
     <div class="alert alert-warning">
-      <p>¿Estás seguro de que quieres borrar la lista: <strong>{{ item.name }}</strong>?</p>
+      <p>¿Estás seguro de que quieres borrar la lista: <strong>{{ list.name }}</strong>?</p>
     </div>
 
     <div class="form-footer text-end">
-      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
+      <a href="{% url 'lists' %}" class="btn btn-secondary me-2">Cancelar</a>
       <button type="submit" class="btn btn-danger">Borrar</button>
     </div>
   </div>

@@ -51,7 +51,7 @@
     <input type="hidden" name="list_pk" value="{{ item.list.pk }}">
 
     <div class="form-footer text-end">
-      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
+      <a href="{% url 'lists' %}" class="btn btn-secondary me-2">Cancelar</a>
       <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
   </form>

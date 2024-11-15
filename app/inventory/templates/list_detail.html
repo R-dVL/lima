@@ -81,18 +81,29 @@
 </div>
 
 <script>
+    let debounceTimeout;
     function filterItems() {
-        const searchInput = document.getElementById('search-input').value.toLowerCase();
-        const items = document.querySelectorAll('.item-item');
-
-        items.forEach(item => {
-            const itemName = item.getAttribute('data-name');
-            if (itemName.includes(searchInput)) {
-                item.style.display = '';  // Show item
-            } else {
-                item.style.display = 'none';  // Hide item
-            }
-        });
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const items = document.querySelectorAll('.item-item');
+        
+            items.forEach(item => {
+                const itemName = item.getAttribute('data-name');
+                if (itemName.includes(searchInput)) {
+                    item.style.display = '';  // Show item
+                } else {
+                    item.style.display = 'none';  // Hide item
+                }
+            });
+        }, 300);
     }
+
+    // Initialize dropdowns after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.dropdown-toggle').forEach((dropdown) => {
+            new bootstrap.Dropdown(dropdown);
+        });
+    });
 </script>
 {% endblock %}

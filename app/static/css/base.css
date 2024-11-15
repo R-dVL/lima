@@ -37,3 +37,7 @@
 .card.out-of-stock .card-body {
     color: #333;
 }
+
+.dropdown-menu {
+    z-index: 1050; /* Ensure it appears above other content */
+}

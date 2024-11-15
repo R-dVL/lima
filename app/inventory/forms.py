@@ -14,12 +14,13 @@ class ListForm(forms.ModelForm):
         """
         Meta
         """
-        model = Item
-        fields = ['name', 'description']
+        model = List
+        fields = ['name', 'description', 'image']
 
         labels = {
             'name': _('Name'),
-            'description': _('Description')
+            'description': _('Description'),
+            'image': _('Image')
         }
 
 class ItemForm(forms.ModelForm):

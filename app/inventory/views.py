@@ -179,4 +179,4 @@ class ListDeleteView(DeleteView):
 
     def get_success_url(self):
         # Redirect to the main list overview page after deletion
-        return reverse_lazy('list_overview')
+        return reverse_lazy('lists')
