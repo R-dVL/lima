@@ -8,8 +8,6 @@ from .models import Article
 class ArticleForm(forms.ModelForm):
     """
     Form for adding or editing an article in the inventory.
-
-    Inherits from Django's ModelForm to generate a form based on the Article model.
     """
     class Meta:
         """
@@ -38,17 +36,3 @@ class ArticleForm(forms.ModelForm):
             'quantity': 'Cantidad',
             'quantity_to_buy': 'Cantidad a comprar'
         }
-
-class ItemFilterForm(forms.Form):
-    """
-    Searchbar form configuration
-    """
-    name = forms.CharField(
-        required=False,
-        label='Nombre',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Buscar por nombre'
-            }
-        )
-    )

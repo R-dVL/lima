@@ -8,14 +8,14 @@
 <form method="post" action="" enctype="multipart/form-data">
   {% csrf_token %}
 
-  <!-- Encabezado de la página -->
+  <!-- Header -->
   <div class="header mb-4">
     <h3>Añadir Nuevo Artículo</h3>
   </div>
 
-  <!-- Cuerpo del formulario -->
+  <!-- Form body -->
   <div class="form-body">
-    <!-- Mostrar errores no asociados a campos específicos -->
+    <!-- Specific errors -->
     <div class="{% if form.non_field_errors %}is-invalid{% endif %} mb-3">
       {% for error in form.non_field_errors %}
         <div class="alert alert-danger">
@@ -24,14 +24,14 @@
       {% endfor %}
     </div>
 
-    <!-- Recorrer los campos del formulario -->
+    <!-- Loop over 'Article' fields -->
     {% for field in form %}
       <div class="form-group mb-3">
 
-        <!-- Etiqueta del campo -->
+        <!-- Field label -->
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
-        <!-- Campo de entrada, incluyendo manejo para checkbox y fecha -->
+        <!-- Input fields-->
         {% if field.field.widget.input_type == "checkbox" %}
           <div class="form-check">
             {% render_field field class="form-check-input" %}
@@ -40,11 +40,12 @@
         {% elif field.field.widget.input_type == "date" %}
           {% render_field field class="form-control" type="date" %}
         {% else %}
-          <!-- Renderiza otros campos normales (input, text, number, etc.) -->
+
+          <!-- Read Fields -->
           {% render_field field class="form-control" placeholder=field.label %}
         {% endif %}
 
-        <!-- Mostrar errores de validación del campo -->
+        <!-- Shows validation errors -->
         <div class="invalid-feedback d-block">
           {% for error in field.errors %}
             <p class="help-block">{{ error }}</p>
@@ -54,7 +55,7 @@
     {% endfor %}
   </div>
 
-  <!-- Pie de formulario -->
+  <!-- Footer -->
   <div class="form-footer mt-3 text-end">
     <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
     <button type="submit" class="btn btn-primary">Añadir</button>

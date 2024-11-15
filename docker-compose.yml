@@ -1,6 +1,7 @@
 services:
   lima:
     image: ghcr.io/r-dvl/lima/lima:latest
+    pull_policy: always
     container_name: lima
     volumes:
       - data:/app/data

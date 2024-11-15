@@ -5,12 +5,12 @@
 {% block content %}
 <div class="container mt-5">
     <div class="d-flex align-items-center">
-        <!-- Barra de búsqueda -->
+        <!-- Search bar -->
         <div class="flex-grow-1">
             <input type="text" id="search-input" class="form-control" placeholder="Buscar artículos..." oninput="filterArticles()">
         </div>
 
-        <!-- Botón Añadir -->
+        <!-- Add button -->
         <div class="ms-3">
             <a href="{% url 'create_article' %}" class="btn btn-primary">
                 Añadir
@@ -19,10 +19,11 @@
     </div>
 
     <!-- Total Global Cost Alert -->
-    <div class="alert alert-info mt-3" role="alert"> <!-- Añadido mt-3 para margen superior -->
+    <div class="alert alert-info mt-3" role="alert">
         Total a gastar para completar el inventario: {{ total_global_cost }}€
     </div>
 
+    <!-- Article list -->
     <div class="row" id="article-list">
         {% for article in articles %}
         <div class="col-12 col-md-4 mb-3 article-item" data-name="{{ article.name|lower }}">
@@ -86,9 +87,9 @@
         articles.forEach(article => {
             const articleName = article.getAttribute('data-name');
             if (articleName.includes(searchInput)) {
-                article.style.display = '';  // Mostrar el artículo si coincide
+                article.style.display = '';  // Show article
             } else {
-                article.style.display = 'none';  // Ocultar el artículo si no coincide
+                article.style.display = 'none';  // Hide article
             }
         });
     }
