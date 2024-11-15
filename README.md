@@ -1,3 +1,5 @@
-[![Pylint](https://github.com/r-dvl/lima/actions/workflows/pylint.yml/badge.svg)](https://github.com/r-dvl/lima/actions/workflows/pylint.yml)
+<p align="center">
+<img src="app/static/assets/icons/lima-with-name.png">
+</p>
 
 # Lima
