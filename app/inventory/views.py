@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
+from .forms import ArticleForm
 from .models import Article
 
 @login_required
