@@ -29,11 +29,11 @@
 }
 
 .card.out-of-stock {
-    background-color: #f8d7da;  /* Rojo pastel suave */
-    color: #333;  /* Texto más oscuro para que sea legible */
+    background-color: #f8d7da;
+    color: #333;
 }
 
 .card.out-of-stock .card-title,
 .card.out-of-stock .card-body {
-    color: #333;  /* Mantener el color del texto oscuro para mayor legibilidad */
+    color: #333;
 }

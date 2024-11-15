@@ -25,6 +25,9 @@ urlpatterns = [
     path('inventory/', include('inventory.urls')),
     path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
+
+    # URLs de internacionalización
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 if settings.DEBUG:

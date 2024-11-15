@@ -1,26 +1,27 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}
-    Inventario | Lima
+    {% trans "Inventory" %} | Lima
 {% endblock %}
 {% block content %}
 <div class="container mt-5">
     <div class="d-flex align-items-center">
         <!-- Search bar -->
         <div class="flex-grow-1">
-            <input type="text" id="search-input" class="form-control" placeholder="Buscar artículos..." oninput="filterArticles()">
+            <input type="text" id="search-input" class="form-control" placeholder="{% trans 'Search articles...' %}" oninput="filterArticles()">
         </div>
 
         <!-- Add button -->
         <div class="ms-3">
             <a href="{% url 'create_article' %}" class="btn btn-primary">
-                Añadir
+                {% trans "Add" %}
             </a>
         </div>
     </div>
 
     <!-- Total Global Cost Alert -->
     <div class="alert alert-info mt-3" role="alert">
-        Total a gastar para completar el inventario: {{ total_global_cost }}€
+        {% trans "Total to spend to complete inventory:" %} {{ total_global_cost }}€
     </div>
 
     <!-- Article list -->
@@ -40,8 +41,8 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ article.pk }}">
-                        <li><a class="dropdown-item" href="{% url 'update_article' article.pk %}">Editar</a></li>
-                        <li><a class="dropdown-item text-danger" href="{% url 'delete_article' article.pk %}">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update_article' article.pk %}">{% trans "Edit" %}</a></li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'delete_article' article.pk %}">{% trans "Delete" %}</a></li>
                     </ul>
                 </div>
 
@@ -57,11 +58,11 @@
 
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <span class="text-muted" style="font-size: 1.1rem;">
-                        Total {{ article.total_cost }}€
+                        {% trans "Total" %} {{ article.total_cost }}€
                     </span>
 
                     <div class="ms-auto d-flex align-items-center">
-                        <span class="quantity me-3" style="font-size: 1rem;">{{ article.quantity }} de {{ article.quantity_to_buy }}</span>
+                        <span class="quantity me-3" style="font-size: 1rem;">{{ article.quantity }}/{{ article.quantity_to_buy }}</span>
                         <a href="{% url 'decrease_quantity' article.pk %}"
                            class="btn btn-secondary rounded-circle me-2 {% if article.quantity == 0 %}disabled{% endif %}"
                            style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">-</a>
@@ -73,7 +74,7 @@
         </div>
         {% empty %}
         <div class="alert alert-warning" role="alert" style="width: 100%;">
-            No articles in inventory.
+            {% trans "No articles in inventory." %}
         </div>
         {% endfor %}
     </div>
