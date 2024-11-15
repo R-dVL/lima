@@ -1,5 +1,11 @@
 <p align="center">
-<img src="app/static/assets/icons/lima-with-name.png" width="300">
+<img src="app/static/assets/icons/lima-with-name.png" width="300" title="App Logo">
 </p>
----
-Inventory organization WebApp.
+<h3 align="center">Inventory organization WebApp.</h3>
+<br/>
+
+## Table of Contents
+In progress...
+
+## Demo
+In progress...
