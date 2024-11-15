@@ -3,3 +3,4 @@ django-bootstrap-v5
 django-widget-tweaks
 pylint-django
 python-dotenv
+Pillow

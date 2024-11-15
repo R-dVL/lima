@@ -30,22 +30,23 @@
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- Dropdown button without border and with only flag -->
+                            <button class="btn p-0" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background: none; border: none; padding: 0; height: auto;">
                                 {% if request.LANGUAGE_CODE == 'en' %}
-                                    <span class="flag-icon flag-icon-gb"></span>
+                                    <span class="flag-icon flag-icon-gb" style="font-size: 2rem; display: inline-block;"></span>
                                 {% else %}
-                                    <span class="flag-icon flag-icon-{{ request.LANGUAGE_CODE }}"></span>
+                                    <span class="flag-icon flag-icon-{{ request.LANGUAGE_CODE }}" style="font-size: 2rem; display: inline-block;"></span>
                                 {% endif %}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                                 <li>
                                     <button class="dropdown-item" type="submit" name="language" value="es">
-                                        <span class="flag-icon flag-icon-es"></span>
+                                        <span class="flag-icon flag-icon-es" style="font-size: 2rem; display: inline-block;"></span>
                                     </button>
                                 </li>
                                 <li>
                                     <button class="dropdown-item" type="submit" name="language" value="en">
-                                        <span class="flag-icon flag-icon-gb"></span>
+                                        <span class="flag-icon flag-icon-gb" style="font-size: 2rem; display: inline-block;"></span>
                                     </button>
                                 </li>
                             </ul>

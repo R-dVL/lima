@@ -9,8 +9,14 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
-from .forms import ItemForm
+from .forms import ItemForm, ListForm
 from .models import Item, List
+
+def redirect_to_lists(request):
+    """
+    Redirects any request to /inventory/lists/
+    """
+    return redirect('/inventory/lists/')
 
 @login_required
 def lists(request):
@@ -133,3 +139,44 @@ class ItemDeleteView(DeleteView):
         # Redirect to the list_detail view of the List this item belongs to
         list_pk = self.object.list.pk  # Get the List object from the deleted Item
         return reverse_lazy('list_detail', kwargs={'pk': list_pk})
+
+class ListCreateView(CreateView):
+    """
+    Create a new Inventory List.
+    """
+    model = List
+    template_name = 'crud/create_list.html'
+    form_class = ListForm
+
+    def form_valid(self, form):
+        # Save the form and redirect to the list detail view
+        self.object = form.save()
+        return redirect('list_detail', pk=self.object.pk)
+
+class ListUpdateView(UpdateView):
+    """
+    Update an Inventory List.
+    """
+    model = List
+    template_name = 'crud/update_list.html'
+    form_class = ListForm
+
+    def form_valid(self, form):
+        # Save the updated list
+        self.object = form.save()
+        return redirect('list_detail', pk=self.object.pk)
+
+    def get_success_url(self):
+        # Optionally specify the redirect URL
+        return reverse_lazy('list_detail', kwargs={'pk': self.object.pk})
+
+class ListDeleteView(DeleteView):
+    """
+    Delete an Inventory List.
+    """
+    model = List
+    template_name = 'crud/delete_list.html'
+
+    def get_success_url(self):
+        # Redirect to the main list overview page after deletion
+        return reverse_lazy('list_overview')

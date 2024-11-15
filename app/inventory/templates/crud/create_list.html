@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    Añadir lista | Inventario
+{% endblock %}
+{% block content %}
+
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="hidden" name="list_pk" value="{{ list.pk }}">
+
+  <!-- Header -->
+  <div class="header mb-4">
+    <h3>Añadir nueva lista</h3>
+  </div>
+
+  <!-- Form body -->
+  <div class="form-body">
+    <!-- Specific errors -->
+    <div class="{% if form.non_field_errors %}is-invalid{% endif %} mb-3">
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ error }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Loop over 'Item' fields -->
+    {% for field in form %}
+      <div class="form-group mb-3">
+
+        <!-- Field label -->
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+        <!-- Input fields-->
+        {% if field.field.widget.input_type == "checkbox" %}
+          <div class="form-check">
+            {% render_field field class="form-check-input" %}
+            <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          </div>
+        {% elif field.field.widget.input_type == "date" %}
+          {% render_field field class="form-control" type="date" %}
+        {% else %}
+          <!-- Read Fields -->
+          {% render_field field class="form-control" placeholder=field.label %}
+        {% endif %}
+
+        <!-- Shows validation errors -->
+        <div class="invalid-feedback d-block">
+          {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Footer -->
+  <div class="form-footer mt-3 text-end">
+    <a href="{% url 'list_detail' pk=list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Añadir</button>
+  </div>
+</form>
+{% endblock %}

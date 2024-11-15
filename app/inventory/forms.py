@@ -4,7 +4,23 @@ CRUD Forms for 'inventory' app
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Item
+from .models import Item, List
+
+class ListForm(forms.ModelForm):
+    """
+    Form for adding or editing an list in the inventory.
+    """
+    class Meta:
+        """
+        Meta
+        """
+        model = Item
+        fields = ['name', 'description']
+
+        labels = {
+            'name': _('Name'),
+            'description': _('Description')
+        }
 
 class ItemForm(forms.ModelForm):
     """
