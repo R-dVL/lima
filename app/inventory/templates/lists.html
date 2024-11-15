@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Lists" %} | Inventory
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h3>{% trans "Inventory Lists" %}</h3>
+
+    <div class="list-group mt-3">
+        {% for list in lists %}
+        <a href="{% url 'list_detail' list.pk %}" class="list-group-item list-group-item-action">
+            {{ list.name }}
+        </a>
+        {% empty %}
+        <div class="alert alert-warning" role="alert">
+            {% trans "No lists available." %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

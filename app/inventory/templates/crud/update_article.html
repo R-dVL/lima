@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block title %}
-    Actualizar articulo | Lima
+    Actualizar artículo | Lima
 {% endblock %}
 {% block content %}
 
 <div class="container mt-5">
-  <h3 class="mb-4">Actualizar articulo</h3>
+  <h3 class="mb-4">Actualizar artículo</h3>
 
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
@@ -47,8 +47,11 @@
       </div>
     {% endfor %}
 
+    <!-- Hidden input for list_pk -->
+    <input type="hidden" name="list_pk" value="{{ article.list.pk }}">
+
     <div class="form-footer text-end">
-      <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+      <a href="{% url 'list_detail' pk=article.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
       <button type="submit" class="btn btn-primary">Actualizar</button>
     </div>
   </form>

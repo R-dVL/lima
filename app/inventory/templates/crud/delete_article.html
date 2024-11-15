@@ -8,6 +8,9 @@
 <form method="post" action="">
   {% csrf_token %}
 
+  <!-- Hidden field for list_pk -->
+  <input type="hidden" name="list_pk" value="{{ article.list.pk }}">
+
   <div class="container mt-5">
     <h3 class="mb-4">Borrar artículo</h3>
 
@@ -16,7 +19,7 @@
     </div>
 
     <div class="form-footer text-end">
-      <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+      <a href="{% url 'list_detail' pk=article.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
       <button type="submit" class="btn btn-danger">Borrar</button>
     </div>
   </div>

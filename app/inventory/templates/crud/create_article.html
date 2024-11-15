@@ -7,6 +7,7 @@
 
 <form method="post" action="" enctype="multipart/form-data">
   {% csrf_token %}
+  <input type="hidden" name="list_pk" value="{{ list.pk }}">
 
   <!-- Header -->
   <div class="header mb-4">
@@ -40,7 +41,6 @@
         {% elif field.field.widget.input_type == "date" %}
           {% render_field field class="form-control" type="date" %}
         {% else %}
-
           <!-- Read Fields -->
           {% render_field field class="form-control" placeholder=field.label %}
         {% endif %}
@@ -57,7 +57,7 @@
 
   <!-- Footer -->
   <div class="form-footer mt-3 text-end">
-    <a href="{% url 'article_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+    <a href="{% url 'list_detail' pk=list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
     <button type="submit" class="btn btn-primary">Añadir</button>
   </div>
 </form>

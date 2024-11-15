@@ -3,7 +3,12 @@ Models for the 'Inventory' app.
 """
 from django.db import models
 
+class List(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
 
+    def __str__(self):
+        return self.name
 
 class Article(models.Model):
     """Represents an article in the inventory.
@@ -35,6 +40,7 @@ class Article(models.Model):
         decimal_places=2,
         default=0
     )
+    list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='articles')
 
     def increase_quantity(self, amount):
         """
@@ -57,3 +63,6 @@ class Article(models.Model):
         """
         quantity_needed = max(self.quantity_to_buy - self.quantity, 0)
         return quantity_needed * self.price
+
+    def __str__(self):
+        return self.name
