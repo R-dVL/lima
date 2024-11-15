@@ -4,8 +4,10 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="/">
             <img id="lima-logo" src="{% static 'assets/icons/favicon.svg' %}" alt="Logo" draggable="false" height="50" />
-            <span class="ms-2 lobster-font" style="font-size: 1.5rem;">Lima</span>
-            <span class="text-muted ms-1" style="font-size: 0.9rem;">{{ APP_VERSION }}</span>
+            <div class="d-flex flex-column align-items-center ms-2">
+                <span class="lobster-font" style="font-size: 1.5rem; line-height: 1;">Lima</span>
+                <span class="text-muted" style="font-size: 0.8rem; margin-top: 0px;">{{ APP_VERSION }}</span>
+            </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
