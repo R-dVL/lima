@@ -36,17 +36,3 @@ class ArticleForm(forms.ModelForm):
             'quantity': 'Cantidad',
             'quantity_to_buy': 'Cantidad a comprar'
         }
-
-class ItemFilterForm(forms.Form):
-    """
-    Searchbar form configuration
-    """
-    name = forms.CharField(
-        required=False,
-        label='Nombre',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Buscar por nombre'
-            }
-        )
-    )
