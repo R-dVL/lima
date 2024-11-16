@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block title %}
 {% trans "Lists" %} | Inventory
 {% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="d-flex align-items-center">
         <!-- Search bar -->
         <div class="flex-grow-1">
-            <input type="text" id="search-input" class="form-control" placeholder="{% trans 'Search lists...' %}"
-                oninput="filterLists()">
+            <input type="text" id="search-input" class="form-control" placeholder="{% trans 'Search lists...' %}" oninput="filterLists()">
         </div>
 
         <!-- Add button -->
@@ -23,36 +24,59 @@
     <!-- Lists section -->
     <div class="row mt-3" id="list-container">
         {% for list in lists %}
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-4"> <!-- Adjusted grid classes -->
-            <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
-                <div class="card h-100">
-                    {% if list.image %}
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <!-- Image Section -->
+                {% if list.image %}
+                <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
                     <img src="{{ list.image.url }}" class="card-img-top img-fluid" alt="{{ list.name }}">
-                    {% else %}
+                </a>
+                {% else %}
+                <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
                     <div class="card-img-top d-flex align-items-center justify-content-center text-muted"
                         style="height: 200px; background-color: #f8f9fa;">
                         <span>{% trans "No Image" %}</span>
                     </div>
-                    {% endif %}
-                    <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
-                        <button class="btn p-0" id="dropdownMenuLink{{ list.pk }}" data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                            <i class="fas fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink{{ list.pk }}">
-                            <li><a class="dropdown-item" href="{% url 'update_list' list.pk %}">{% trans "Edit" %}</a>
-                            </li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'delete_list' list.pk %}">{% trans
-                                    "Delete" %}</a></li>
-                        </ul>
+                </a>
+                {% endif %}
+
+                <!-- Dropdown Button -->
+                <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
+                    <button class="btn p-0" data-bs-toggle="modal" data-bs-target="#actionModal{{ list.pk }}"
+                        onclick="stopEvent(event)"
+                        style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                        <i class="fas fa-ellipsis-vertical"></i>
+                    </button>
+                </div>
+
+                <!-- Card Footer -->
+                <div class="card-footer text-center">
+                    <h5 class="card-title mb-1" style="color: inherit; font-weight: bold;">
+                        <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">{{ list.name }}</a>
+                    </h5>
+                    <p class="card-text text-muted">{{ list.description|default:"" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="actionModal{{ list.pk }}" tabindex="-1" aria-labelledby="actionModalLabel{{ list.pk }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="actionModalLabel{{ list.pk }}">{{ list.name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card-footer text-center">
-                        <h5 class="card-title mb-1" style="color: inherit; font-weight: bold;">{{ list.name }}</h5>
-                        <p class="card-text text-muted">{{ list.description|default:"" }}</p>
+                    <div class="modal-body">
+                        <a class="btn btn-primary w-100 mb-2" href="{% url 'update_list' list.pk %}">
+                            {% trans "Edit" %}
+                        </a>
+                        <a class="btn btn-danger w-100" href="{% url 'delete_list' list.pk %}">
+                            {% trans "Delete" %}
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         {% empty %}
         <div class="alert alert-warning" role="alert">
@@ -65,7 +89,7 @@
 <script>
     function filterLists() {
         const searchInput = document.getElementById('search-input').value.toLowerCase();
-        const listCards = document.querySelectorAll('.col-md-6, .col-lg-4'); <!-- Adjusted for responsive grid -->
+        const listCards = document.querySelectorAll('.col-sm-12, .col-md-6, .col-lg-4');
 
         listCards.forEach(card => {
             const listName = card.querySelector('.card-title').textContent.toLowerCase();
@@ -75,6 +99,10 @@
                 card.style.display = 'none'; // Hide the card
             }
         });
+    }
+
+    function stopEvent(event) {
+        event.stopPropagation();
     }
 </script>
 {% endblock %}
