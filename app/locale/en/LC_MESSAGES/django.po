@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-15 17:12+0100\n"
+"POT-Creation-Date: 2024-11-16 11:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,67 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: inventory/forms.py:23
-msgid "Per unit"
-msgstr ""
-
-#: inventory/forms.py:28
-msgid "Units"
-msgstr ""
-
-#: inventory/forms.py:34
+#: inventory/forms.py:21 inventory/forms.py:51
 msgid "Name"
 msgstr ""
 
-#: inventory/forms.py:35
+#: inventory/forms.py:22 inventory/forms.py:52
 msgid "Description"
 msgstr ""
 
-#: inventory/forms.py:36
+#: inventory/forms.py:23
+msgid "Image"
+msgstr ""
+
+#: inventory/forms.py:40
+msgid "Per unit"
+msgstr ""
+
+#: inventory/forms.py:45
+msgid "Units"
+msgstr ""
+
+#: inventory/forms.py:53
 msgid "Price"
 msgstr ""
 
-#: inventory/forms.py:37
+#: inventory/forms.py:54
 msgid "Amount"
 msgstr ""
 
-#: inventory/forms.py:38
+#: inventory/forms.py:55
 msgid "Amount to buy"
 msgstr ""
 
-#: inventory/templates/item_list.html:4 templates/_navbar.html:19
+#: inventory/templates/list_detail.html:5 templates/_navbar.html:20
 msgid "Inventory"
 msgstr ""
 
-#: inventory/templates/item_list.html:11
+#: inventory/templates/list_detail.html:13
 msgid "Search items..."
 msgstr ""
 
-#: inventory/templates/item_list.html:17
+#: inventory/templates/list_detail.html:19 inventory/templates/lists.html:20
 msgid "Add"
 msgstr ""
 
-#: inventory/templates/item_list.html:24
+#: inventory/templates/list_detail.html:26
 msgid "Total to spend to complete inventory:"
 msgstr ""
 
-#: inventory/templates/item_list.html:44
-msgid "Edit"
-msgstr ""
-
-#: inventory/templates/item_list.html:45
-msgid "Delete"
-msgstr ""
-
-#: inventory/templates/item_list.html:61
+#: inventory/templates/list_detail.html:56
 msgid "Total"
 msgstr ""
 
-#: inventory/templates/item_list.html:77
+#: inventory/templates/list_detail.html:80 inventory/templates/lists.html:73
+msgid "Edit"
+msgstr ""
+
+#: inventory/templates/list_detail.html:81 inventory/templates/lists.html:76
+msgid "Delete"
+msgstr ""
+
+#: inventory/templates/list_detail.html:89
 msgid "No items in inventory."
 msgstr ""
 
-#: server/settings.py:138
+#: inventory/templates/lists.html:5
+msgid "Lists"
+msgstr ""
+
+#: inventory/templates/lists.html:14
+msgid "Search lists..."
+msgstr ""
+
+#: inventory/templates/lists.html:37
+msgid "No Image"
+msgstr ""
+
+#: inventory/templates/lists.html:84
+msgid "No lists available."
+msgstr ""
+
+#: server/settings.py:138 templates/_navbar.html:70
 msgid "English"
 msgstr ""
 
@@ -86,6 +106,14 @@ msgstr ""
 msgid "Español"
 msgstr "Spanish"
 
-#: templates/_navbar.html:24
+#: templates/_navbar.html:25
 msgid "Admin"
+msgstr ""
+
+#: templates/_navbar.html:60
+msgid "Select Language"
+msgstr ""
+
+#: templates/_navbar.html:67
+msgid "Spanish"
 msgstr ""
