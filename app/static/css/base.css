@@ -38,11 +38,12 @@
     color: #333;
 }
 
-.dropdown-menu {
-    z-index: 1050;
-}
-
 .card-img-top {
     object-fit: cover;
     height: 200px;
+}
+
+.no-link-style {
+    text-decoration: none;
+    color: inherit;
 }

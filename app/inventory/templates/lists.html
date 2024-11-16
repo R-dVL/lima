@@ -53,7 +53,7 @@
                 <!-- Card Footer -->
                 <div class="card-footer text-center">
                     <h5 class="card-title mb-1" style="color: inherit; font-weight: bold;">
-                        <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">{{ list.name }}</a>
+                        <a href="{% url 'list_detail' list.pk %}" class="no-link-style">{{ list.name }}</a>
                     </h5>
                     <p class="card-text text-muted">{{ list.description|default:"" }}</p>
                 </div>
@@ -104,4 +104,5 @@
         event.stopPropagation();
     }
 </script>
+
 {% endblock %}
