@@ -26,32 +26,15 @@
                 </li>
                 {% endif %}
 
+                <!-- Language Modal Trigger -->
                 <li class="nav-item ms-3 d-flex align-items-center">
-                    <form action="{% url 'set_language' %}" method="post">
-                        {% csrf_token %}
-                        <div class="dropdown">
-                            <!-- Dropdown button without border and with only flag -->
-                            <button class="btn p-0" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background: none; border: none; padding: 0; height: auto;">
-                                {% if request.LANGUAGE_CODE == 'en' %}
-                                    <span class="flag-icon flag-icon-gb" style="font-size: 2rem; display: inline-block;"></span>
-                                {% else %}
-                                    <span class="flag-icon flag-icon-{{ request.LANGUAGE_CODE }}" style="font-size: 2rem; display: inline-block;"></span>
-                                {% endif %}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <li>
-                                    <button class="dropdown-item" type="submit" name="language" value="es">
-                                        <span class="flag-icon flag-icon-es" style="font-size: 2rem; display: inline-block;"></span>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="dropdown-item" type="submit" name="language" value="en">
-                                        <span class="flag-icon flag-icon-gb" style="font-size: 2rem; display: inline-block;"></span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
+                    <button class="btn p-0" type="button" data-bs-toggle="modal" data-bs-target="#languageModal" style="background: none; border: none; padding: 0;">
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            <span class="flag-icon flag-icon-gb" style="font-size: 2rem;"></span>
+                        {% else %}
+                            <span class="flag-icon flag-icon-{{ request.LANGUAGE_CODE }}" style="font-size: 2rem;"></span>
+                        {% endif %}
+                    </button>
                 </li>
 
                 {% if user.is_authenticated %}
@@ -68,3 +51,26 @@
         </div>
     </div>
 </nav>
+
+<!-- Language Modal -->
+<div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="languageModalLabel">{% trans "Select Language" %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-primary w-100 mb-2" type="submit" name="language" value="es">
+                        <span class="flag-icon flag-icon-es" style="font-size: 2rem;"></span> {% trans "Spanish" %}
+                    </button>
+                    <button class="btn btn-outline-primary w-100" type="submit" name="language" value="en">
+                        <span class="flag-icon flag-icon-gb" style="font-size: 2rem;"></span> {% trans "English" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
