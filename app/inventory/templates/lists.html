@@ -2,11 +2,12 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Lists" %} | Inventory
+    {% trans "Lists" %} | Inventory
 {% endblock %}
 
 {% block content %}
 <div class="container mt-5">
+    <!-- Header Section -->
     <div class="d-flex align-items-center">
         <!-- Search bar -->
         <div class="flex-grow-1">
@@ -21,30 +22,30 @@
         </div>
     </div>
 
-    <!-- Lists section -->
+    <!-- Lists Section -->
     <div class="row mt-3" id="list-container">
         {% for list in lists %}
         <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100">
                 <!-- Image Section -->
-                {% if list.image %}
                 <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
+                    {% if list.image %}
                     <img src="{{ list.image.url }}" class="card-img-top img-fluid" alt="{{ list.name }}">
-                </a>
-                {% else %}
-                <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">
+                    {% else %}
                     <div class="card-img-top d-flex align-items-center justify-content-center text-muted"
-                        style="height: 200px; background-color: #f8f9fa;">
+                         style="height: 200px; background-color: #f8f9fa;">
                         <span>{% trans "No Image" %}</span>
                     </div>
+                    {% endif %}
                 </a>
-                {% endif %}
 
-                <!-- Dropdown Button -->
+                <!-- Modal Trigger -->
                 <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
-                    <button class="btn p-0" data-bs-toggle="modal" data-bs-target="#actionModal{{ list.pk }}"
-                        onclick="stopEvent(event)"
-                        style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                    <button class="btn p-0"
+                            data-bs-toggle="modal"
+                            data-bs-target="#actionModal{{ list.pk }}"
+                            onclick="stopEvent(event)"
+                            style="background-color: transparent; border: none; padding: 0; font-size: 1.5rem; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
                         <i class="fas fa-ellipsis-vertical"></i>
                     </button>
                 </div>
@@ -52,14 +53,14 @@
                 <!-- Card Footer -->
                 <div class="card-footer text-center">
                     <h5 class="card-title mb-1" style="color: inherit; font-weight: bold;">
-                        <a href="{% url 'list_detail' list.pk %}" class="text-decoration-none">{{ list.name }}</a>
+                        <a href="{% url 'list_detail' list.pk %}" class="no-link-style">{{ list.name }}</a>
                     </h5>
                     <p class="card-text text-muted">{{ list.description|default:"" }}</p>
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal for Actions -->
         <div class="modal fade" id="actionModal{{ list.pk }}" tabindex="-1" aria-labelledby="actionModalLabel{{ list.pk }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -87,22 +88,21 @@
 </div>
 
 <script>
+    // Filters lists based on the search input
     function filterLists() {
         const searchInput = document.getElementById('search-input').value.toLowerCase();
         const listCards = document.querySelectorAll('.col-sm-12, .col-md-6, .col-lg-4');
 
         listCards.forEach(card => {
             const listName = card.querySelector('.card-title').textContent.toLowerCase();
-            if (listName.includes(searchInput)) {
-                card.style.display = ''; // Show the card
-            } else {
-                card.style.display = 'none'; // Hide the card
-            }
+            card.style.display = listName.includes(searchInput) ? '' : 'none';
         });
     }
 
+    // Prevents the modal trigger button click from propagating
     function stopEvent(event) {
         event.stopPropagation();
     }
 </script>
+
 {% endblock %}
