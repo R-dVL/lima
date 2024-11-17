@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-16 11:18+0100\n"
+"POT-Creation-Date: 2024-11-17 11:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,17 +50,112 @@ msgstr "Cantidad"
 msgid "Amount to buy"
 msgstr "Cantidad a comprar"
 
-#: inventory/templates/list_detail.html:5 templates/_navbar.html:20
+#: inventory/templates/crud/create_item.html:4
+#: inventory/templates/crud/create_item.html:14
+msgid "Create item"
+msgstr "Crear artículo"
+
+#: inventory/templates/crud/create_item.html:60
+#: inventory/templates/crud/create_list.html:60
+#: inventory/templates/crud/delete_item.html:22
+#: inventory/templates/crud/delete_list.html:22
+#: inventory/templates/crud/update_item.html:54
+#: inventory/templates/crud/update_list.html:54
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: inventory/templates/crud/create_item.html:61
+#: inventory/templates/crud/create_list.html:61
+#: inventory/templates/list_detail.html:19 inventory/templates/lists.html:20
+msgid "Add"
+msgstr "Añadir"
+
+#: inventory/templates/crud/create_list.html:4
+#: inventory/templates/crud/create_list.html:14
+msgid "Create list"
+msgstr "Crear lista"
+
+#: inventory/templates/crud/delete_item.html:4
+#: inventory/templates/crud/delete_item.html:15
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete item"
+msgstr "Eliminar"
+
+#: inventory/templates/crud/delete_item.html:18
+msgid "Do want to delete the item: "
+msgstr "¿Quieres eliminar el artículo: "
+
+#: inventory/templates/crud/delete_item.html:23
+#: inventory/templates/crud/delete_list.html:23
+#: inventory/templates/list_detail.html:81 inventory/templates/lists.html:76
+msgid "Delete"
+msgstr "Eliminar"
+
+#: inventory/templates/crud/delete_list.html:4
+#: inventory/templates/crud/delete_list.html:15
+#, fuzzy
+#| msgid "Delete"
+msgid "Delete list"
+msgstr "Eliminar"
+
+#: inventory/templates/crud/delete_list.html:18
+msgid "Do want to delete the list: "
+msgstr "¿Quieres eliminar la lista: "
+
+#: inventory/templates/crud/read_item.html:4
+#: inventory/templates/crud/read_item.html:8
+msgid "Item details"
+msgstr "Detalles del artículo"
+
+#: inventory/templates/crud/read_item.html:13
+msgid "Item name:"
+msgstr "Nombre del artículo:"
+
+#: inventory/templates/crud/read_item.html:16
+#, fuzzy
+#| msgid "Description"
+msgid "Description:"
+msgstr "Descripción:"
+
+#: inventory/templates/crud/read_item.html:19
+#, fuzzy
+#| msgid "Price"
+msgid "Price:"
+msgstr "Precio:"
+
+#: inventory/templates/crud/read_item.html:22
+#, fuzzy
+#| msgid "Amount"
+msgid "Amount:"
+msgstr "Cantidad:"
+
+#: inventory/templates/crud/read_item.html:27
+msgid "Close"
+msgstr "Cerrar"
+
+#: inventory/templates/crud/update_item.html:4
+#: inventory/templates/crud/update_item.html:9
+msgid "Update item"
+msgstr "Actualizar artículo"
+
+#: inventory/templates/crud/update_item.html:55
+#: inventory/templates/crud/update_list.html:55
+msgid "Update"
+msgstr "Actualizar"
+
+#: inventory/templates/crud/update_list.html:4
+#: inventory/templates/crud/update_list.html:9
+msgid "Update list"
+msgstr "Actualizar lista"
+
+#: inventory/templates/list_detail.html:5
 msgid "Inventory"
 msgstr "Inventario"
 
 #: inventory/templates/list_detail.html:13
 msgid "Search items..."
 msgstr "Buscar artículos..."
-
-#: inventory/templates/list_detail.html:19 inventory/templates/lists.html:20
-msgid "Add"
-msgstr "Añadir"
 
 #: inventory/templates/list_detail.html:26
 msgid "Total to spend to complete inventory:"
@@ -73,10 +168,6 @@ msgstr "Total"
 #: inventory/templates/list_detail.html:80 inventory/templates/lists.html:73
 msgid "Edit"
 msgstr "Editar"
-
-#: inventory/templates/list_detail.html:81 inventory/templates/lists.html:76
-msgid "Delete"
-msgstr "Eliminar"
 
 #: inventory/templates/list_detail.html:89
 msgid "No items in inventory."
@@ -98,7 +189,7 @@ msgstr "Sin imagen"
 msgid "No lists available."
 msgstr "No hay listas disponibles"
 
-#: server/settings.py:138 templates/_navbar.html:70
+#: server/settings.py:138 templates/_navbar.html:67
 msgid "English"
 msgstr "Inglés"
 
@@ -106,14 +197,14 @@ msgstr "Inglés"
 msgid "Español"
 msgstr "Español"
 
-#: templates/_navbar.html:25
+#: templates/_navbar.html:22
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/_navbar.html:60
+#: templates/_navbar.html:57
 msgid "Select Language"
 msgstr "Selecciona un idioma"
 
-#: templates/_navbar.html:67
+#: templates/_navbar.html:64
 msgid "Spanish"
 msgstr "Español"

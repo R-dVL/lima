@@ -1,31 +1,31 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block title %}
-Detalle articulo | Lima
+    {% trans "Item details" %} | Lima
 {% endblock %}
 {% block content %}
 
-    <h3 class="mb-4">Detalles del artículo</h3>
+    <h3 class="mb-4">{% trans "Item details" %}</h3>
 
     <div class="card">
         <div class="card-body">
             <div class="mb-3">
-                <strong>Nombre del artículo:</strong> {{ item.name }}
+                <strong>{% trans "Item name:" %}</strong> {{ item.name }}
             </div>
             <div class="mb-3">
-                <strong>Descripción:</strong> {{ item.description }}
+                <strong>{% trans "Description:" %}</strong> {{ item.description }}
             </div>
             <div class="mb-3">
-                <strong>Precio:</strong> {{ item.price }} €
+                <strong>{% trans "Price:" %}</strong> {{ item.price }} €
             </div>
             <div class="mb-3">
-                <strong>Cantidad:</strong> {{ item.quantity }}
+                <strong>{% trans "Amount:" %}</strong> {{ item.quantity }}
             </div>
         </div>
 
         <div class="mt-4 text-end">
-            <a href="{% url 'item_list' %}" class="btn btn-secondary">Cerrar</a>
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">{% trans "Close" %}</a>
         </div>
     </div>
 
-    {% endblock %}
+{% endblock %}
