@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load widget_tweaks %}
 {% block title %}
-    Actualizar artículo | Lima
+    {% trans "Update item" %} | Lima
 {% endblock %}
 {% block content %}
 
 <div class="container mt-5">
-  <h3 class="mb-4">Actualizar artículo</h3>
+  <h3 class="mb-4">{% trans "Update item" %}</h3>
 
   <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
@@ -51,8 +52,8 @@
     <input type="hidden" name="list_pk" value="{{ item.list.pk }}">
 
     <div class="form-footer text-end">
-      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">Cancelar</a>
-      <button type="submit" class="btn btn-primary">Actualizar</button>
+      <a href="{% url 'list_detail' pk=item.list.pk %}" class="btn btn-secondary me-2">{% trans "Cancel" %}</a>
+      <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
     </div>
   </form>
 </div>

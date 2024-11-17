@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load widget_tweaks %}
 {% block title %}
-    Borrar lista | Inventario
+  {% trans "Delete list" %} | Lima
 {% endblock %}
 {% block content %}
 
@@ -12,15 +13,15 @@
   <input type="hidden" name="list_pk" value="{{ list.list.pk }}">
 
   <div class="container mt-5">
-    <h3 class="mb-4">Borrar lista</h3>
+    <h3 class="mb-4">{% trans "Delete list" %}</h3>
 
     <div class="alert alert-warning">
-      <p>¿Estás seguro de que quieres borrar la lista: <strong>{{ list.name }}</strong>?</p>
+      <p>{% trans "Do want to delete the list: " %}<strong>{{ list.name }}</strong>?</p>
     </div>
 
     <div class="form-footer text-end">
-      <a href="{% url 'lists' %}" class="btn btn-secondary me-2">Cancelar</a>
-      <button type="submit" class="btn btn-danger">Borrar</button>
+      <a href="{% url 'lists' %}" class="btn btn-secondary me-2">{% trans "Cancel" %}</a>
+      <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
     </div>
   </div>
 </form>

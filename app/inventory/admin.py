@@ -1,3 +1,6 @@
+"""
+Admin views
+"""
 from django.contrib import admin
 from .models import Item, List
 

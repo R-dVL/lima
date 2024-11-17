@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-16 11:18+0100\n"
+"POT-Creation-Date: 2024-11-17 11:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,16 +50,101 @@ msgstr ""
 msgid "Amount to buy"
 msgstr ""
 
-#: inventory/templates/list_detail.html:5 templates/_navbar.html:20
+#: inventory/templates/crud/create_item.html:4
+#: inventory/templates/crud/create_item.html:14
+msgid "Create item"
+msgstr ""
+
+#: inventory/templates/crud/create_item.html:60
+#: inventory/templates/crud/create_list.html:60
+#: inventory/templates/crud/delete_item.html:22
+#: inventory/templates/crud/delete_list.html:22
+#: inventory/templates/crud/update_item.html:54
+#: inventory/templates/crud/update_list.html:54
+msgid "Cancel"
+msgstr ""
+
+#: inventory/templates/crud/create_item.html:61
+#: inventory/templates/crud/create_list.html:61
+#: inventory/templates/list_detail.html:19 inventory/templates/lists.html:20
+msgid "Add"
+msgstr ""
+
+#: inventory/templates/crud/create_list.html:4
+#: inventory/templates/crud/create_list.html:14
+msgid "Create list"
+msgstr ""
+
+#: inventory/templates/crud/delete_item.html:4
+#: inventory/templates/crud/delete_item.html:15
+msgid "Delete item"
+msgstr ""
+
+#: inventory/templates/crud/delete_item.html:18
+msgid "Do want to delete the item: "
+msgstr ""
+
+#: inventory/templates/crud/delete_item.html:23
+#: inventory/templates/crud/delete_list.html:23
+#: inventory/templates/list_detail.html:81 inventory/templates/lists.html:76
+msgid "Delete"
+msgstr ""
+
+#: inventory/templates/crud/delete_list.html:4
+#: inventory/templates/crud/delete_list.html:15
+msgid "Delete list"
+msgstr ""
+
+#: inventory/templates/crud/delete_list.html:18
+msgid "Do want to delete the list: "
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:4
+#: inventory/templates/crud/read_item.html:8
+msgid "Item details"
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:13
+msgid "Item name:"
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:16
+msgid "Description:"
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:19
+msgid "Price:"
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:22
+msgid "Amount:"
+msgstr ""
+
+#: inventory/templates/crud/read_item.html:27
+msgid "Close"
+msgstr ""
+
+#: inventory/templates/crud/update_item.html:4
+#: inventory/templates/crud/update_item.html:9
+msgid "Update item"
+msgstr ""
+
+#: inventory/templates/crud/update_item.html:55
+#: inventory/templates/crud/update_list.html:55
+msgid "Update"
+msgstr ""
+
+#: inventory/templates/crud/update_list.html:4
+#: inventory/templates/crud/update_list.html:9
+msgid "Update list"
+msgstr ""
+
+#: inventory/templates/list_detail.html:5
 msgid "Inventory"
 msgstr ""
 
 #: inventory/templates/list_detail.html:13
 msgid "Search items..."
-msgstr ""
-
-#: inventory/templates/list_detail.html:19 inventory/templates/lists.html:20
-msgid "Add"
 msgstr ""
 
 #: inventory/templates/list_detail.html:26
@@ -72,10 +157,6 @@ msgstr ""
 
 #: inventory/templates/list_detail.html:80 inventory/templates/lists.html:73
 msgid "Edit"
-msgstr ""
-
-#: inventory/templates/list_detail.html:81 inventory/templates/lists.html:76
-msgid "Delete"
 msgstr ""
 
 #: inventory/templates/list_detail.html:89
@@ -98,7 +179,7 @@ msgstr ""
 msgid "No lists available."
 msgstr ""
 
-#: server/settings.py:138 templates/_navbar.html:70
+#: server/settings.py:138 templates/_navbar.html:67
 msgid "English"
 msgstr ""
 
@@ -106,14 +187,14 @@ msgstr ""
 msgid "Español"
 msgstr "Spanish"
 
-#: templates/_navbar.html:25
+#: templates/_navbar.html:22
 msgid "Admin"
 msgstr ""
 
-#: templates/_navbar.html:60
+#: templates/_navbar.html:57
 msgid "Select Language"
 msgstr ""
 
-#: templates/_navbar.html:67
+#: templates/_navbar.html:64
 msgid "Spanish"
 msgstr ""

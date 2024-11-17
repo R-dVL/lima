@@ -23,8 +23,8 @@ def lists(request):
     """
     Render the list of inventory lists with links to each list's items.
     """
-    lists = List.objects.all()
-    return render(request, 'lists.html', {'lists': lists})
+    lists_obj = List.objects.all()
+    return render(request, 'lists.html', {'lists': lists_obj})
 
 @login_required
 def list_detail(request, pk):
@@ -108,7 +108,7 @@ class ItemUpdateView(UpdateView):
 
     def form_valid(self, form):
         # Save the updated item
-        item = form.save()
+        self.object = form.save()
 
         # Get the associated List's primary key from the form data
         list_pk = self.request.POST.get('list_pk')
