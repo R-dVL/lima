@@ -6,46 +6,7 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11"]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install pylint pylint-django
-
-      - name: Set up Django environment
-        run: |
-          export DJANGO_SETTINGS_MODULE=app.settings
-
-      - name: Analysing the code with pylint
-        id: pylint
-        run: |
-          # Ejecutar pylint y almacenar la salida en un archivo temporal
-          pylint --rcfile=.pylintrc $(git ls-files '*.py') > pylint_report.txt || true
-
-          # Mostrar el contenido completo del archivo en la consola
-          cat pylint_report.txt
-
-          # Extraer la puntuación desde el archivo
-          score=$(awk '/^Your code has been rated at/{print $7}' pylint_report.txt | cut -d'/' -f1)
-          echo "Pylint score: $score"
-
-          # Verificar si la puntuación cumple con el umbral
-          if (( $(echo "$score < 8.5" | bc -l) )); then
-            echo "Pylint score ($score) is below 8.5. Failing the build."
-            exit 1
-          else
-            echo "Pylint score ($score) meets the required threshold. Success."
-          fi
+  pylint:
+    uses: r-dvl/reusable-workflows/.github/workflows/pylint.yml@main
+    with:
+      threshold: 8.5
